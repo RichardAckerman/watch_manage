@@ -1,0 +1,28 @@
+<!--  新增设备IMEI号 -->
+<div class="modal fade" id="addEquip" tabindex="-1" role="dialog"
+     aria-labelledby="myEditUserInfo" aria-hidden="true" ng-controller="addEquipCtrl">
+    <!--警告提示-->
+    <div ng-include="'notice/notice.html'"></div>
+    <div class="modal-dialog head-info-modal add-equip-modal">
+        <div class="modal-content">
+            <div class="modal-header head-info-m-head">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">添加设备</h4>
+            </div>
+            <form name="equipForm" novalidate>
+                <div class="modal-body form-horizontal head-info-body">
+                    <div class="form-group">
+                        <label for="ImeiNumber" class="col-sm-2 control-label">IMEI号:</label>
+                        <div class="col-sm-10">
+                            <textarea id="ImeiNumber" ng-model="imei" class="add-equip-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer head-info-footer">
+                    <button type="button" class="btn" ng-click="addEquip()">保存</button>
+                    <button type="button" class="btn" data-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

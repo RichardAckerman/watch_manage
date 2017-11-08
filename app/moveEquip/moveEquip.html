@@ -1,0 +1,68 @@
+<!-- 转移设备 Modal-->
+<div class="modal fade" id="moveEquip" tabindex="-1" role="dialog"
+     aria-labelledby="uEquip" aria-hidden="true" ng-controller="moveEquipCtrl">
+    <!--警告提示-->
+    <div ng-include="'notice/notice.html'"></div>
+    <div class="modal-dialog equip-info-modal move-equip-modal">
+        <div class="modal-content">
+            <div class="modal-header equip-info-m-head">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">转移设备</h4>
+            </div>
+            <form name="equipForm" novalidate ng-submit="transEquip()">
+                <div class="modal-body form-horizontal equip-info-body">
+                    <p>转移给:</p>
+                    <div class="form-group form-inline">
+                        <label for="aim-custom" class="col-sm-2 control-label">目标客户&nbsp;</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="aim-custom" class="form-control" ng-model="aimCustomer" placeholder="请选择" ng-disabled="true">
+                            <input type="hidden" ng-model="aimCusId">
+                            <button type="button" class="btn pull-down-btn" ng-click="dropDown($event)">&nbsp;</button>
+                        </div>
+                    </div>
+                    <div class="form-inline">
+                        转移设备: &nbsp;
+                        <label for="move-imei-number" class="control-label">IMEI号&nbsp;</label>
+                        <input type="text" id="move-imei-number" class="form-control " ng-model="imeiNumber">
+                        <button type="button" class="btn" ng-click="pushEquip()">添加</button>
+                    </div>
+                    <div>
+                        <table class="table table-striped" style="margin-bottom: 0">
+                            <thead>
+                            <tr class="customer-table-head">
+                                <th class="text-center">序号</th>
+                                <th class="text-center">设备名</th>
+                                <th class="text-center">IMEI号</th>
+                                <th class="text-center">所属用户</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="customer-table-body">
+                            <tr class="customer-table" ng-repeat="equip in equips">
+                                <td class="text-center">{{$index}}</td>
+                                <td class="text-center">{{equip.equipName}}</td>
+                                <td class="text-center">{{equip.imei}}</td>
+                                <td class="text-center">{{equip.dealerName}}</td>
+                                <td class="text-center">
+                                    <a href="javascript:void(0);" class="customer-table-link" ng-click="del($index)">删除</a>
+                                </td>
+                            </tr>
+                            <tr class="customer-table-tr3">
+                                <td class="customer-table-tr-td"></td>
+                                <td class="customer-table-tr-td"></td>
+                                <td class="customer-table-tr-td"></td>
+                                <td class="customer-table-tr-td"></td>
+                                <td class="customer-table-tr-td"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer equip-info-footer">
+                    <button type="submit" class="btn">保存</button>
+                    <button type="button" class="btn" data-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

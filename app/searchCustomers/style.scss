@@ -1,0 +1,29 @@
+@charset "UTF-8";
+@import "../assets/css/color";
+.search-customer-modal.equip-info-modal{
+  width: 686px;
+  min-height: 430px;
+  .search-customer-input{
+    padding-left: 0;
+  }
+  .search-customer-table{
+    margin-top: 20px;
+    .customer-table-head{
+      background-color: $table_th;
+      font-size: 14px;
+      color: $font_color_black;
+      th{
+        border: 1px $font_color_white solid;
+      }
+    }
+    .customer-table-body{
+      td{
+        border: 1px $font_color_white solid;
+        background: $background_breadcrumb;
+      }
+    }
+  }
+  .modal-footer{
+    text-align: center;
+  }
+}

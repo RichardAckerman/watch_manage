@@ -1,0 +1,79 @@
+<!-- BEGIN HEADER -->
+<div ng-include="'head/head.html'"></div>
+<!-- Header END -->
+<div class="customer position" ng-controller="positionCtrl">
+    <div class="row customer-breadcrumb-row">
+        <ol class="breadcrumb col-md-8 customer-breadcrumb">
+            <li><a href="javascript:void(0);" class="customer-breadcrumb-link">&nbsp;&nbsp;&nbsp;&nbsp;当前位置</a></li>
+            <li><a href="javascript:void(0);" class="customer-breadcrumb-link">定位监控</a></li>
+        </ol>
+        <div class="customer-breadcrumb-input col-md-4">
+            <input type="text" placeholder="设备名称/IMEI号/客户名/帐号" size="30px" ng-model="searchParams">
+            <button class="btn btn-default btn-xs customer-button-style" ng-click="searchEquips()" type="button">搜设备</button>
+            <button class="btn btn-default btn-xs customer-button-style" ng-click="searchCustomers()" type="button">搜客户</button>
+        </div>
+    </div>
+    <div class="row font customer-list">
+        <div class="col-md-2 customer-list-head position-map-left">
+            <div class="float-icon" ng-click="operatMenu('close')" ng-show="isFold == false">
+                <i class="icon"></i>
+            </div>
+            <div class="row customer-list-row font-head">
+                <div class="col-md-8 font-head-small" ng-click="showPosition()">设备列表</div>
+            </div>
+            <div class="panel-group" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default" ng-repeat="info in dealerInfo">
+                    <div class="panel-heading" role="tab">
+                        <h4 class="panel-title">
+                            <i ng-class="{'icon-close': true, 'icon-open': iconActive[$index] === 'false'}"></i>
+                            <a role="button" data-toggle="collapse" href="#collapse{{$index}}" aria-expanded="false" aria-controls="collapseOne"
+                               ng-click="collapseClick($event, info.userName, $index)" ng-class="{'active': info.isActive}">
+                                {{info.userName}}({{info.onlineNum}}/{{info.equips ? info.equips.length : 0}})
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <P ng-repeat="equip in info.equips" class="equip-list">
+                                <a href="javascript:void(0);" ng-click="equipChoose(equip.imei)" ng-class="{'online' : equip.isOnline === true, 'active': equip.isActive}">
+                                    {{equip.name ? equip.name : 'no name' }}
+                                </a>
+                            </P>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 position-map">
+            <div class="float-icon" ng-click="operatMenu('open')" ng-show="isFold == true">
+                <i class="icon"></i>
+            </div>
+            <div class="position-map-head row">
+                <div class="col-md-7">{{detailAddress}}</div>
+                <div style="float: right" class="position-map-btn-control">
+                    <div class="col-md-4">
+                        <label for="map-sel" style="display: none"></label>
+                        <select id="map-sel" ng-model="mapChoose" ng-change="mapChooseChg()">
+                            <option value="baidu">百度地图</option>
+                            <option value="google">谷歌地图</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="checkbox" id="map-center-lock" class="map-center-lock" ng-model="clockCenter" ng-click="isClockCenter(clockCenter)">
+                        <label for="map-center-lock" class="chk-label">锁定居中</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="checkbox" id="map-equip-name" class="map-equip-name" ng-model="showName" ng-click="isShowName(showName)">
+                        <label for="map-equip-name" class="chk-label">设备名称</label>
+                    </div>
+                </div>
+            </div>
+            <div class="position-map-body">
+                <div id="baiduContainer" style="height: 100%" ng-controller="baiduMapCtrl" ng-if="mapChoose == 'baidu'"></div>
+                <div id="googleContainer" style="height: 100%" ng-controller="googleMapCtrl" ng-if="mapChoose == 'google'"></div>
+            </div>
+        </div>
+    </div>
+    <div ng-include="'notice/msgModal.html'"></div>
+    <loading></loading>
+</div>

@@ -1,0 +1,67 @@
+<!-- 搜索设备 Modal-->
+<div class="modal fade" id="searchEquips" tabindex="-1" role="dialog"
+     aria-labelledby="uEquip" aria-hidden="true" ng-controller="searchEquipsCtrl">
+    <!--警告提示-->
+    <div ng-include="'notice/notice.html'"></div>
+    <div class="modal-dialog equip-info-modal search-customer-modal">
+        <div class="modal-content">
+            <div class="modal-header equip-info-m-head">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">搜设备</h4>
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="search-customer-table">
+                    <p>搜索到 <span>{{recordNum}}</span> 条记录</p>
+                    <table class="table table-striped" style="margin-bottom: 20px;">
+                        <thead>
+                        <tr class="customer-table-head">
+                            <th class="text-center">名称</th>
+                            <th class="text-center">所属用户</th>
+                            <th class="text-center">设备手机号</th>
+                            <th class="text-center">创建时间</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="customer-table-body">
+                        <tr class="customer-table" ng-hide="equip == undefined">
+                            <td class="text-center">{{equip.equipName}}</td>
+                            <td class="text-center"></td>
+                            <td class="text-center">{{equip.sim | inactive:equip.libraryStatus}}</td>
+                            <td class="text-center">{{equip.createTime}}</td>
+                            <td class="text-center">
+                                <a href="javascript:void(0);" class="customer-table-link" ng-click="transferCus($event, equip)">转移</a> |
+                                <a href="javascript:void(0);" class="customer-table-link" ng-click="updateEquip()">修改</a> |
+                                <a href="javascript:void(0);" class="customer-table-link" ng-click="removeEquip(equip.id)">删除</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p>所属客户</p>
+                    <table class="table table-striped" style="margin-bottom: 0">
+                        <thead>
+                        <tr class="customer-table-head">
+                            <th class="text-center">客户名称</th>
+                            <th class="text-center">登录账号</th>
+                            <th class="text-center">联系人</th>
+                            <th class="text-center">电话</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="customer-table-body">
+                        <tr class="customer-table" ng-hide="customer == undefined">
+                            <td class="text-center">{{customer.userName}}</td>
+                            <td class="text-center">{{customer.email}}</td>
+                            <td class="text-center">{{customer.linkman}}</td>
+                            <td class="text-center">{{customer.dealerPhone}}</td>
+                            <td class="text-center">
+                                <a href="javascript:void(0);" class="customer-table-link" ng-click="showCustomer()">查看</a> |
+                                <a href="javascript:void(0);" class="customer-table-link">定位监控</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

@@ -1,0 +1,46 @@
+<div class="row head font" ng-controller="headCtrl">
+    <div class="col-md-6 head-first-piece">
+        <div class="row font-head">
+            <div class="col-md-2 head-images">
+                <img src="https://so360.org/static/logo.png" class="img-responsive" alt="logo">
+            </div>
+            <div class="col-md-2 font-head-big head-user-name">
+                <p class="text-left">{{userAdmin.userName}}</p>
+            </div>
+            <div class="col-md-2 head-customer" ng-click="isActive = '/customer'" ng-class="{'active' : isActive.indexOf('/customer') != -1}">
+                <a href="#!/customer" class="head-link font-head">
+                    <div class="head-customer-image">
+                        <img src="https://so360.org/static/my_customer.png" class="img-responsive">
+                    </div>
+                    <div class="font-head-small head-customer-font">
+                        我的客户
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-2 head-customer" ng-click="isActive = '/position'" ng-class="{'active' : isActive.indexOf('/position') != -1}">
+                <a href="#!/position" class="head-link font-head">
+                    <div class="head-customer-image">
+                        <img src="https://so360.org/static/position.png" class="img-responsive">
+                    </div>
+                    <div>
+                        <div class="font-head-small head-customer-font">
+                            定位监控
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 head-second-piece">
+        <div class="font-head head-fond-cent">
+            <p class="text-center">您好,&nbsp;&nbsp;
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#personalInfo">{{userAdmin.userName}}</a>&nbsp;&nbsp;
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#updatePassword">【修改密码】</a>
+                <a href="javascript:void(0);" ng-click="logOut()">退出</a>
+            </p>
+        </div>
+    </div>
+</div>
+<!--编辑个人资料 （Modal） -->
+<div ng-include="'personalInfo/personalInfo.html'"></div>
+<div ng-include="'updatePassword/updatePassword.html'"></div>

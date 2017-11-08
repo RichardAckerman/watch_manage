@@ -1,0 +1,59 @@
+@charset "UTF-8";
+@import "../assets/css/color";
+.u-password {
+  margin: 0 auto;
+  top: 25%;
+  width: 378px;
+  height: 276px;
+  .u-info-password {
+    background-color: $background_head;
+    color: $font_color_gray_white;
+    font-size: 14px;
+    padding: 20px 18px;
+    height: 53px;
+  }
+  .modal-title {
+    font-size: 14px;
+    line-height: 1.029;
+  }
+  .close {
+    color: $font_color_white;
+    margin-top: -6px;
+    opacity: 0.7;
+  }
+  .u-p-body {
+    padding: 28px 0 0 58px;
+    input {
+      width: 172px;
+      font-size: 12px;
+      color: $font_color_black;
+    }
+    label {
+      padding: 7px 2px 0 0;
+      font-size: 12px;
+      color: $font_color_gray;
+    }
+    span {
+      @extend input;
+      display: inherit;
+      margin-top: 6px;
+    }
+  }
+
+  .u-p-footer {
+    button {
+      width: 87px;
+      font-size: 12px;
+      color: $font_color_black;
+      background-color: $font_color_white;
+    }
+    button:first-child {
+      color: $font_color_white;
+      background-color: $background_head;
+      margin-right: 31px;
+    }
+    button:last-child {
+      margin-right: 44px
+    }
+  }
+}

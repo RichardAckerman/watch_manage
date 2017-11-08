@@ -1,0 +1,187 @@
+<!-- BEGIN HEADER -->
+<div ng-include="'head/head.html'"></div>
+<!-- Header END -->
+<div class="customer" ng-controller="customerCtrl">
+    <div class="row customer-breadcrumb-row">
+        <ol class="breadcrumb col-md-8 customer-breadcrumb">
+            <li><a href="javascript:void(0);" class="customer-breadcrumb-link">&nbsp;&nbsp;&nbsp;&nbsp;当前位置</a></li>
+            <li><a href="javascript:void(0);" class="customer-breadcrumb-link">我的客户</a></li>
+        </ol>
+        <div class="customer-breadcrumb-input col-md-4">
+            <input type="text" placeholder="设备名称/IMEI号/客户名/帐号" size="30px" ng-model="searchParams">
+            <button class="btn btn-default btn-xs customer-button-style" ng-click="searchEquips()" type="button">搜设备</button>
+            <button class="btn btn-default btn-xs customer-button-style" ng-click="searchCustomers()" type="button">搜客户</button>
+        </div>
+    </div>
+    <div class="row font customer-list">
+        <div class="col-md-2 customer-list-head">
+            <div class="row customer-list-row font-head">
+                <div class="col-md-8 font-head-small">客户列表</div>
+                <div class="col-md-4 add-button"><img src="https://so360.org/static/add.png" class="customer-list-image">
+                    <a href="javascript:void(0)" ng-click="addCustomer()">新增</a></div>
+            </div>
+            <div class="customer-right-nav">
+                <div class="customer-right-nav-father" data-toggle="collapse" data-target=".child" ng-click="superiorSelected()">
+                    <img src="https://so360.org/static/customer_group.png" alt="father">
+                    <a href="javascript:void(0);" ng-class="{active : isActive === 1}">
+                       {{userAdmin.userName}}({{userEquipNum}})
+                    </a>
+                </div>
+                <div class="child" ng-repeat="subordinateDealer in subordinateDealers">
+                    <div class="customer-right-nav-child">
+                        <img src="https://so360.org/static/customer_one.png" alt="child">
+                        <a href="javascript:void(0);" ng-click="listActive($index)" data-index="{{$index}}" contextmenu ng-class="{active : dealerActive === $index}">{{subordinateDealer.userName}}
+                            ({{subordinateDealer.equipNum}})</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 customer-content">
+            <div class="row customer-content-head">
+                <div class="col-md-1 cus-con-head-index text-center font-head">
+                    <span class="font-head-small">{{messageType}}</span>
+                </div>
+                <div class="col-md-10 cus-con-head-right">
+                    <div class="cus-con-head-r-list">
+                        <div class="row">
+                            <div class="col-md-3"><span>客户名称 : {{userDealer.userName}}</span></div>
+                            <div class="col-md-3"><span>登录帐号 : {{userDealer.email}}</span></div>
+                            <div class="col-md-3"><span>设备数量 : {{userDealer.equipNum}}</span></div>
+                        </div>
+                    </div>
+                    <div class="cus-con-head-r-list">
+                        <div class="row">
+                            <div class="col-md-3"><span>联系人 : {{userDealer.linkman}}</span></div>
+                            <div class="col-md-3"><span>电话 : {{userDealer.dealerPhone}}</span></div>
+                            <div class="col-md-3"><span>地址 : {{userDealer.dealerAddress}}</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 cus-con-head-right">
+                    <div class="cus-con-head-r-edit" data-toggle="modal" data-target="#editUserInfo">
+                        <img src="https://so360.org/static/edit.png" alt="编辑" class="cus-con-head-r-i">
+                        <span>编辑</span>
+                    </div>
+                </div>
+            </div>
+            <div class="customer-table">
+                <div class="customer-content-breadcrumb">
+                    <div class="cus-con-bcb">
+                        <a href="javascript:void(0);" class="cus-con-bcb-link-index" ng-click="moveEquip()">批量转移</a>
+                        <a href="javascript:void(0);" class="cus-con-bcb-link" ng-click="delInBatch()">批量删除</a>
+                        <a href="javascript:void(0);" class="cus-con-bcb-link" ng-click="exportExcel()">导出Excel</a>
+                        <a href="javascript:void(0);" class="cus-con-bcb-link" ng-click="addEquip()" ng-show="isAdmin">添加设备</a>
+                    </div>
+                </div>
+                <div>
+                    <table class="table table-striped" style="margin-bottom: 0">
+                        <thead>
+                        <tr class="customer-table-head">
+                            <th class="text-center">
+                                <label>
+                                    <input type="checkbox" ng-model="equipAll" ng-click="allChecked()">
+                                </label>
+                            </th>
+                            <th class="text-center">序号</th>
+                            <th class="text-center">设备IMEI号</th>
+                            <th class="text-center">设备名称</th>
+                            <th class="text-center">设备手机号</th>
+                            <th class="text-center">创建时间</th>
+                            <th class="text-center">激活时间</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="customer-table-body">
+                        <tr class="customer-table" ng-repeat="equip in equips">
+                            <td class="text-center">
+                                <label>
+                                    <input type="checkbox" ng-model="equip.isChecked" ng-click="singleClick()" ng-bind="equip.id">
+                                </label>
+                            </td>
+                            <td class="text-center">
+                                <span>{{$index + 1}}</span>
+                            </td>
+                            <td class="text-center">
+                                <span>{{equip.imei | blank}}</span>
+                            </td>
+                            <td class="text-center">
+                                <span>{{equip.equipName}}</span>
+                            </td>
+                            <td class="text-center">
+                                <span>{{equip.sim | inactive:equip.libraryStatus}}</span>
+                            </td>
+                            <td class="text-center">
+                                <span>{{equip.createTime}}</span>
+                            </td>
+                            <td class="text-center">
+                                <span>{{equip.activationTime | inactive:equip.libraryStatus}}</span>
+                            </td>
+                            <td class="text-center">
+                            <span>
+                                <a href="javascript:void(0);" class="customer-table-link" ng-click="transferCustomer($event, equip.id)">转移</a> |
+                                <a href="javascript:void(0);" class="customer-table-link" ng-click="updateEquip(equip)">修改</a> |
+                                <a href="javascript:void(0);" class="customer-table-link" ng-click="removeEquip(equip.id)">删除</a>
+                            </span>
+                            </td>
+                        </tr>
+                        <tr class="customer-table-tr3">
+                            <td class="customer-table-tr-td"></td>
+                            <td class="customer-table-tr-td"></td>
+                            <td class="customer-table-tr-td"></td>
+                            <td class="customer-table-tr-td"></td>
+                            <td class="customer-table-tr-td"></td>
+                            <td class="customer-table-tr-td"></td>
+                            <td class="customer-table-tr-td"></td>
+                            <td class="customer-table-tr-td"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center customer-table-color">
+                    <ul class="pagination pagination-sm customer-table-paging">
+                        <li><a href="javascript:void(0);" ng-click="prevClick()">&laquo;</a></li>
+                        <li ng-repeat="page in pages track by $index"><a href="javascript:void(0);"
+                                                                         ng-click="pagingQuery($index+1)"
+                                                                         ng-class="{'active':pageIsActive == $index+1}">{{$index+1}}</a></li>
+                        <li><a href="javascript:void(0);" ng-click="nextClick()">&raquo;</a></li>
+                    </ul>
+                </div>
+                <div class="customer-table-foot">
+                    <div>
+                        <span>
+                            每页显示条数
+                            <label>
+                                <select name="pageSize" ng-model="pageSize" ng-change="pageSizeChg()">
+                                    <option ng-repeat="value in allPageSize track by $index" value="{{value}}">{{value}}</option>
+                                </select>
+                            </label>
+                            条
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--编辑个人资料 （Modal） -->
+    <div ng-include="'editUserInfo/editUserInfo.html'"></div>
+    <!--编辑修改设备 （Modal） -->
+    <div ng-include="'updateEquip/updateEquip.html'"></div>
+    <!--批量转移 （Modal） -->
+    <div ng-include="'moveEquip/moveEquip.html'"></div>
+    <!--新增客户 （Modal） -->
+    <div ng-include="'addCustomer/addCustomer.html'"></div>
+    <!--添加设备 （Modal） -->
+    <div ng-include="'addEquip/addEquip.html'"></div>
+    <!--搜客户 （Modal） -->
+    <div ng-include="'searchCustomers/searchCustomers.html'"></div>
+    <!--搜设备 （Modal） -->
+    <div ng-include="'searchEquips/searchEquips.html'"></div>
+    <!--转移 （Modal） -->
+    <div ng-include="'transferCustomer/transferCustomer.html'"></div>
+    <!--显示客户信息 （Modal） -->
+    <div ng-include="'showCustomer/showCustomer.html'"></div>
+    <!--右键菜单 -->
+    <div ng-include="'rightMenu/rightMenu.html'"></div>
+    <!--confirm -->
+    <div ng-include="'notice/msgModal.html'"></div>
+</div>

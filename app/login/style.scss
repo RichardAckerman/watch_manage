@@ -1,0 +1,70 @@
+@charset "UTF-8";
+@import "../assets/css/color";
+
+.login {
+  height: 100%;
+  width: 100%;
+  background-image: url(https://so360.org/static/admin/sign_in_bg.png);
+  .login-frame {
+    height: 333px;
+    width: 429px;
+    background-color: $login_frame;
+    text-align: center;
+    top: 30%;
+    left: 40%;
+    position: absolute;
+    .login-img {
+      margin-top: 26px;
+    }
+    .login-greeting {
+      margin-top: 12px;
+      font-size: 18px;
+      color: $font_color_white;
+      margin-bottom: 31px;
+    }
+    .login-input {
+      margin-top: 18px;
+      margin-bottom: 10px;
+    }
+    .login-checkbox {
+      color: $font_color_white;
+      font-size: 10px;
+      margin-left: -182px;
+      margin-bottom: 30px;
+      .login-checkbox-input {
+        width: 11px;
+        height: 11px;
+        background-color: $login_input;
+        margin-right: 6px;
+        margin-left: 6px;
+        border: 0.3px solid $font_color_white;
+      }
+    }
+    input {
+      width: 241px;
+      height: 37px;
+      text-indent: 13px;
+      border: 0.3px solid $font_color_white;
+      background-color: $login_input;
+      color: $font_color_white;
+    }
+    *::-webkit-input-placeholder {
+      color: $font_color_white;
+    }
+    *:-moz-placeholder {
+      color: $font_color_white;
+    }
+    *:-ms-input-placeholder {
+      /* IE10+ */
+      color: $font_color_white;
+    }
+    .login-button {
+      width: 241px;
+      height: 37px;
+      background-color: $background_head;
+      border: none;
+      color: $font_color_white;
+      font-size: 14px;
+    }
+  }
+}

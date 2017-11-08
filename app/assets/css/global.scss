@@ -1,0 +1,41 @@
+@charset "UTF-8";
+@import "color";
+
+$font_family: "Microsoft YaHei UI";
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: $font_family;
+  font-size: 14px;
+  color: $font_color_black;
+  -webkit-font-smoothing: antialiased;
+  height: 100%;
+  width: 100%;
+  //background-color: $background_breadcrumb;
+}
+
+.font {
+  .font-head {
+    color: $font_color_gray_white;
+    .font-head-big {
+      font-size: 20px;
+    }
+    .font-head-small {
+      font-size: 16px;
+    }
+  }
+}
+//按钮颜色样式
+.btn{
+  background: $background_head;
+  color: $font_color_white;
+}
+.btn:focus,.btn:visited,.btn:hover{
+  color: $font_color_white;
+}
+
+a,a:link,a:visited,a:hover{
+  text-decoration: none;
+  color: $font_color_deep_black;
+}

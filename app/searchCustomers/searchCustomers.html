@@ -1,0 +1,42 @@
+<!-- 搜客户 Modal-->
+<div class="modal fade" id="searchCustomers" tabindex="-1" role="dialog"
+     aria-labelledby="uEquip" aria-hidden="true" ng-controller="searchCustomersCtrl">
+    <div class="modal-dialog equip-info-modal search-customer-modal">
+        <div class="modal-content">
+            <div class="modal-header equip-info-m-head">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">搜客户</h4>
+            </div>
+            <form name="equipForm" novalidate>
+                <div class="modal-body form-horizontal">
+                    <div class="search-customer-table">
+                        <p>搜索到 <span>1</span> 条记录</p>
+                        <table class="table table-striped" style="margin-bottom: 0">
+                            <thead>
+                            <tr class="customer-table-head">
+                                <th class="text-center">客户名称</th>
+                                <th class="text-center">登陆账号</th>
+                                <th class="text-center">联系人</th>
+                                <th class="text-center">电话</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="customer-table-body">
+                            <tr class="customer-table" ng-hide="cusInfo === undefined">
+                                <td class="text-center">{{cusInfo.userName}}</td>
+                                <td class="text-center">{{cusInfo.email}}</td>
+                                <td class="text-center">{{cusInfo.linkman}}</td>
+                                <td class="text-center">{{cusInfo.dealerPhone}}</td>
+                                <td class="text-center">
+                                    <a href="javascript:void(0);" class="customer-table-link" ng-click="showCustomer()">查看</a> |
+                                    <a href="javascript:void(0);" class="customer-table-link" ng-click="showPosition()">定位监控</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

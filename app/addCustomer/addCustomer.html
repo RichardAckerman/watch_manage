@@ -1,0 +1,64 @@
+<!--  新增用户信息 -->
+<div class="modal fade" id="addCustomer" tabindex="-1" role="dialog"
+     aria-labelledby="myEditUserInfo" aria-hidden="true" ng-controller="addCustomerCtrl">
+    <!--警告提示-->
+    <div ng-include="'notice/notice.html'"></div>
+    <div class="modal-dialog head-info-modal">
+        <div class="modal-content">
+            <div class="modal-header head-info-m-head">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">新增客户</h4>
+            </div>
+            <form name="userInfoForm" role="form" novalidate ng-submit="addCustomer()">
+                <div class="modal-body form-horizontal head-info-body">
+                    <div class="form-group">
+                        <label for="userName" class="col-sm-2 control-label"><b style="color: #f00">*</b>客户名称:</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="userName" class="form-control" placeholder="请输入名称" ng-model="userName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userAccount" class="col-sm-2 control-label"><b style="color: #f00">*</b>登录帐号:</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="userAccount" class="form-control" placeholder="请输入邮箱地址" ng-model="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label"><b style="color: #f00">*</b>密码:</label>
+                        <div class="col-sm-10">
+                            <input type="password" id="password" class="form-control" placeholder="请输入密码" ng-model="password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword" class="col-sm-2 control-label">确认密码:</label>
+                        <div class="col-sm-10">
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="确认密码" ng-model="affirm">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userLinkman" class="col-sm-2 control-label">联系人:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="userLinkman" ng-model="linkman">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userLinkPhone" class="col-sm-2 control-label">电话:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="userLinkPhone" ng-model="phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userLinkAddress" class="col-sm-2 control-label">地址:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control address-input" id="userLinkAddress" ng-model="address">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer head-info-footer">
+                    <button type="submit" class="btn" ng-disabled="userInfoForm.$pristine">保存</button>
+                    <button type="button" class="btn" data-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

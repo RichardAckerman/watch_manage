@@ -1,0 +1,10 @@
+logs/*
+!.gitkeep
+node_modules/
+tmp
+.DS_Store
+.idea
+package-lock.json
+.sass-cache
+*.css
+dist/*.js

@@ -1,0 +1,30 @@
+@charset "UTF-8";
+@import "../assets/css/color";
+.transferCustomer{
+  position: absolute;
+  border: 1px solid $border_color_gray;
+  background: $background_breadcrumb;
+  padding: 9px 0;
+  ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li{
+      height: 30px;
+      line-height: 30px;
+      padding: 0 10px;
+      cursor: pointer;
+      &:hover{
+        background: #FFE5BF;
+      }
+      .customer-icon{
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 13px;
+        width: 20px;
+        height: 20px;
+        background: url('https://so360.org/static/customer_one.png') no-repeat;
+      }
+    }
+  }
+}

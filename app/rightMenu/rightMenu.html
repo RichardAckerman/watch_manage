@@ -1,0 +1,9 @@
+<!--  右键菜单 -->
+<div class="rightMenu transferCustomer" id="rightMenu" tabindex="-1" role="dialog" ng-hide="rightMenuHide"
+     aria-labelledby="myTransferCustomer" aria-hidden="true" ng-controller="rightMenuCtrl">
+    <div class="transfer-customer-list">
+        <ul>
+            <li ng-repeat="(key,value) in rightMenuList" ng-click="menuFun(key)"><span>{{value}}</span></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div ng-controller="loginCtrl" class="login">
+    <div class="login-frame">
+        <img src="https://so360.org/static/admin/sign_in_logo.png" alt="log" class="login-img">
+        <div class="login-greeting">欧辰GPS服务社区</div>
+        <form role="form" name="loginForm" novalidate ng-submit="signIn()">
+            <div><input type="text" placeholder="帐号" ng-model="signInData.email"></div>
+            <div class="login-input"><input type="password" placeholder="密码" ng-model="signInData.password"></div>
+            <input type="hidden" ng-model="signInData.cid">
+            <div class="login-checkbox">
+                <input type="checkbox" name="remember" id="rememberEmail" title="记住账号" class="login-checkbox-input" ng-model="remember">
+                <label for="rememberEmail">记住账号</label>
+            </div>
+            <div>
+                <button type="submit" class="login-button">登录</button>
+            </div>
+        </form>
+    </div>
+    <div ng-include="'notice/notice.html'"></div>
+</div>

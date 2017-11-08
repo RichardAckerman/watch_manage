@@ -1,0 +1,50 @@
+<!-- 修改设备 Modal-->
+<div class="modal fade" id="updateEquip" tabindex="-1" role="dialog"
+     aria-labelledby="uEquip" aria-hidden="true" ng-controller="updateEquipCtrl">
+    <!--警告提示-->
+    <div ng-include="'notice/notice.html'"></div>
+    <div class="modal-dialog equip-info-modal">
+        <div class="modal-content">
+            <div class="modal-header equip-info-m-head">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="uEquip">设备信息</h4>
+            </div>
+            <form name="equipForm" novalidate>
+                <div class="modal-body form-horizontal equip-info-body">
+                    <div class="form-group">
+                        <label for="uEquipImei" class="col-sm-3 control-label">IMEI号 :</label>
+                        <div class="col-sm-9">
+                            <span id="uEquipImei" ng-bind="equip.imei"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="uEquipName" class="col-sm-3 control-label">设备名 :</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="uEquipName" ng-model="equipForm.equipName"
+                                   placeholder="{{equip.equipName}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="uEquipPhone" class="col-sm-3 control-label">设备手机号 :</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="uEquipPhone" ng-model="equipForm.sim"
+                                   placeholder="{{equip.sim}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="uEquipRemark" class="col-sm-3 control-label">备注 :</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control remark-input" id="uEquipRemark"
+                                   ng-model="equipForm.remark"
+                                   placeholder="{{equip.remark}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer equip-info-footer">
+                    <button type="button" class="btn" ng-click="updEquip()">保存</button>
+                    <button type="button" class="btn" data-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
