@@ -108,13 +108,13 @@
                                 <span>{{equip.equipName}}</span>
                             </td>
                             <td class="text-center">
-                                <span>{{equip.sim | inactive:equip.libraryStatus}}</span>
+                                <span>{{equip.sim | inactive: (equip.libraryStatus ? equip.libraryStatus : equip.status)}}</span>
                             </td>
                             <td class="text-center">
                                 <span>{{equip.createTime}}</span>
                             </td>
                             <td class="text-center">
-                                <span>{{equip.activationTime | inactive:equip.libraryStatus}}</span>
+                                <span>{{equip.activationTime | inactive: (equip.libraryStatus ? equip.libraryStatus : equip.status)}}</span>
                             </td>
                             <td class="text-center">
                             <span>

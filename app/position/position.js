@@ -12,8 +12,8 @@ position.config(['$routeProvider', function ($routeProvider) {
         })
         .otherwise({redirectTo:'position/position.html'});
 }]);
-position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "loginGetaway", "$routeParams",
-    "errorMsg", "ordinaryMsg", "location", "$timeout", function ($rootScope, $scope, indexService, loginGetaway, $routeParams,
+position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "loginGetaway", "$routeParams", "$window",
+    "errorMsg", "ordinaryMsg", "location", "$timeout", function ($rootScope, $scope, indexService, loginGetaway, $routeParams, $window,
                                                     errorMsg, ordinaryMsg, location, $timeout) {
     $scope.mapChoose = 'baidu';
     $scope.showName = true;
@@ -32,7 +32,11 @@ position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "lo
                         .queryEquipNum($rootScope.userAdmin.id)
                         .success(function (res) {
                             if (res.code === 200) {
-                                sessionStorage.equipInfo = JSON.stringify({initData: res.result, time: (new Date().getTime())});
+                                $window.sessionStorage.equipInfo = JSON.stringify({
+                                    initData: res.result,
+                                    time: (new Date().getTime()),
+                                    userAdmin: data.result.userInfoDTO
+                                });
                                 $scope.dealerInfo = res.result ? res.result : [];
                                 // 获取customer页面的email，查询数据
                                 if ($routeParams.email !== undefined) {
@@ -64,12 +68,13 @@ position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "lo
                 loginGetaway.goLogin();
             });
     };
-    if (sessionStorage.equipInfo === undefined) {
+    if ($window.sessionStorage.equipInfo === undefined) {
         $scope.getEquipInfo();
     } else {
         let nowTime = (new Date()).getTime();
-        let info = JSON.parse(sessionStorage.equipInfo);
+        let info = JSON.parse($window.sessionStorage.equipInfo);
         if (info.time + 5 * 60 * 1000 > nowTime) {
+            $rootScope.userAdmin = info.userAdmin;
             $scope.dealerInfo = info.initData;
             $scope.loading = false;
             // 获取customer页面的email，查询数据

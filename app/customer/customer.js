@@ -115,6 +115,7 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
             .queryPage(pagingParam)
             .success(function (res) {
                 if (res.code === 200) {
+                    console.log(res);
                     $scope.equips = res.result;
                     $scope.pageIsActive = pagingParam.pageNum;
                     if (pagingParam.dealerId === $rootScope.userAdmin.id){
@@ -481,7 +482,6 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
             .success(function (res) {
                 if (res.code === 200) {
                     let result = res.result;
-                    console.log(res);
                     $rootScope.userEquipNum = result.dealerInfoVos.count;
                     $scope.subordinateDealers = result.subordinateDealers;
                     $scope.$broadcast("allUserInfo", $scope.subordinateDealers);

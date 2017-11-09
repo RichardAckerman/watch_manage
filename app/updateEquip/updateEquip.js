@@ -4,12 +4,19 @@ updateEquip.controller('updateEquipCtrl', ["$scope", "library", "closeWind", "pa
     $scope.warnMsg = true;
     $scope.sucMsg = true;
     $scope.updEquip = function () {
+        let phoneReg = /^1[3|4|5|8][0-9]\d{8}$/g;
+        if ($scope.equipForm.sim !== '' && $scope.equipForm.sim !== undefined && !phoneReg.test($scope.equipForm.sim)) {
+            $scope.warnMessage = errorMsg.phoneError;
+            $scope.warnMsg = false;
+            closeWind.close('.notice', $scope);
+            return;
+        }
         let data = {
             'imei': $scope.equip.imei,
             'id': $scope.equip.id,
-            'equipName': $scope.equipForm.equipName,
-            'sim': $scope.equipForm.sim,
-            'remark': $scope.equipForm.remark,
+            'equipName': $scope.equipForm.equipName ? $scope.equipForm.equipName : $scope.equip.equipName,
+            'sim': $scope.equipForm.sim ? $scope.equipForm.sim : $scope.equip.sim,
+            'remark': $scope.equipForm.remark ? $scope.equipForm.remark : $scope.equip.remark,
             'createTime': null,
             'activationTime': null
         };

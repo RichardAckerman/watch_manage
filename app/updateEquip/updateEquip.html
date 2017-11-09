@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="modal-footer equip-info-footer">
-                    <button type="button" class="btn" ng-click="updEquip()">保存</button>
+                    <button type="button" class="btn" ng-click="updEquip()"  ng-disabled="equipForm.$pristine">保存</button>
                     <button type="button" class="btn" data-dismiss="modal">取消</button>
                 </div>
             </form>

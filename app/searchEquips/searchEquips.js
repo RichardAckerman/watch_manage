@@ -1,7 +1,7 @@
 "use strict";
 let searchEquips = angular.module('watchApp.searchEquips', []);
-searchEquips.controller('searchEquipsCtrl', ["$scope", "library", "closeWind", "pathLogin", "ordinaryMsg", "errorMsg", "loginGetaway", "dealer",
-    function ($scope, library, closeWind, pathLogin, ordinaryMsg, errorMsg, loginGetaway, dealer) {
+searchEquips.controller('searchEquipsCtrl', ["$scope", "library", "closeWind", "pathLogin", "ordinaryMsg", "errorMsg", "loginGetaway", "dealer", "$location", "$timeout",
+    function ($scope, library, closeWind, pathLogin, ordinaryMsg, errorMsg, loginGetaway, dealer, $location, $timeout) {
     $scope.warnMsg = true;
     $scope.sucMsg = true;
     $scope.recordNum = 0;
@@ -77,5 +77,12 @@ searchEquips.controller('searchEquipsCtrl', ["$scope", "library", "closeWind", "
         angular.element('#searchEquips').modal('hide');
         angular.element('#showCustomer').modal('toggle');
         $scope.$emit('showCusInfo', $scope.customer);
+    };
+    $scope.showPosition = function () {
+        angular.element('#searchEquips').modal('hide');
+        let timer = $timeout(function () {
+            $location.path('/position/' + $scope.customer.email);
+            $timeout.cancel(timer);
+        }, 500);
     }
 }]);
