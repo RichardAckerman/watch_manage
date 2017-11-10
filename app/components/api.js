@@ -25,6 +25,7 @@ const API__EQUIP_BATCH = API__EQUIP_TRANSFORM + '/batch';
 const API_POSITION_EMAIL = HOST + '/admin/equipInfo/info';
 const API_POSITION_IMEI = HOST + '/admin/equipInfo/imei/';
 const API_POSITION_NAME = HOST + '/admin/equipInfo/name/';
+const API_RESET_PHONE = HOST + '/admin/reset/userPhone/';
 api.config(function ($httpProvider) {
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -166,6 +167,12 @@ api.factory('library', function ($http) {
                 url: API__EQUIP_BATCH,
                 method: 'POST',
                 data: params
+            })
+        },
+        resetPhone: function (id) {
+            return $http({
+                url: API_RESET_PHONE + id,
+                method: 'DELETE',
             })
         }
     }

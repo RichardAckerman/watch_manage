@@ -15,7 +15,7 @@ updateEquip.controller('updateEquipCtrl', ["$scope", "library", "closeWind", "pa
             'imei': $scope.equip.imei,
             'id': $scope.equip.id,
             'equipName': $scope.equipForm.equipName ? $scope.equipForm.equipName : $scope.equip.equipName,
-            'sim': $scope.equipForm.sim ? $scope.equipForm.sim : $scope.equip.sim,
+            'sim': $scope.equip.sim,
             'remark': $scope.equipForm.remark ? $scope.equipForm.remark : $scope.equip.remark,
             'createTime': null,
             'activationTime': null
@@ -26,6 +26,34 @@ updateEquip.controller('updateEquipCtrl', ["$scope", "library", "closeWind", "pa
                     $scope.successMessage = res.msg;
                     $scope.sucMsg = false;
                     $scope.$emit('equipData', data);
+                    closeWind.close('#updateEquip', $scope);
+                } else if (res.code === 408) {
+                    $scope.warnMessage = errorMsg.loginGetaway;
+                    closeWind.close('#updateEquip', $scope);
+                    pathLogin.path($scope);
+                } else {
+                    $scope.warnMessage = res.msg;
+                    $scope.warnMsg = false;
+                    closeWind.close('#updateEquip', $scope);
+                }
+            })
+            .error(function () {
+                $scope.warnMessage = errorMsg.serviceException;
+                $scope.warnMsg = false;
+                closeWind.close('#updateEquip', $scope);
+            });
+    };
+    $scope.clearPhone = function () {
+        if ($scope.equip === undefined) {
+            return;
+        }
+        library
+            .resetPhone($scope.equip.id)
+            .success(function (res) {
+                if (res.code === 200) {
+                    $scope.successMessage = res.msg;
+                    $scope.sucMsg = false;
+                    $scope.equip.sim = "";
                     closeWind.close('#updateEquip', $scope);
                 } else if (res.code === 408) {
                     $scope.warnMessage = errorMsg.loginGetaway;

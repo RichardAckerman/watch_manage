@@ -7,7 +7,7 @@ addEquip.controller('addEquipCtrl', ["$scope", "$rootScope", "library", "closeWi
         $scope.dealerInfo = data;
     });
     $scope.addEquip = function () {
-        let reg = /^\d{15}$/g;
+        let reg = /^\d{10,15}$/g;
         if (!reg.test($scope.imei)) {
             $scope.warnMessage = errorMsg.imeiError.imeiFormat;
             $scope.warnMsg = false;

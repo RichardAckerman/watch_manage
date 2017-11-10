@@ -18,6 +18,19 @@
   .equip-info-body {
     padding: 32px 0 0 49px;
     margin-left: 22px;
+    .equip-phone {
+      width: 120px;
+      display: inline-block;
+    }
+    .clearPhone {
+      border: 1px solid $breadcrumbs;
+      width: 46px;
+      padding: 4px 0;
+      background: #fff;
+      outline: none;
+      border-radius: 4px;
+      color: #000;
+    }
     input {
       width: 172px;
       font-size: 12px;

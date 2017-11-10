@@ -7,7 +7,7 @@ customer.config(['$routeProvider', function ($routeProvider) {
     });
 }]);
 
-customer.directive('contextmenu',function ($filter) {
+customer.directive('contextmenu', function ($filter) {
     return {
         restrict: 'A',
         link: function ($scope, element, attrs) {
@@ -27,7 +27,7 @@ customer.directive('contextmenu',function ($filter) {
     }
 });
 
-customer.controller('customerCtrl', function ($rootScope, $scope, indexService, loginGetaway,dealer,pathLogin,confirmService,
+customer.controller('customerCtrl', function ($rootScope, $scope, indexService, loginGetaway, dealer, pathLogin, confirmService,
                                               library, errorMsg, ordinaryMsg, $window, $filter, closeWind, $timeout) {
     // 管理显示添加设备功能
     $scope.isAdmin = false;
@@ -42,8 +42,8 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
     $scope.rightMenuHide = true;
     $scope.userList = true;// 转移设备客户列表
     // 窗口绑定事件
-    angular.element($window).on('click', function() {
-        $scope.$apply(function() {
+    angular.element($window).on('click', function () {
+        $scope.$apply(function () {
             $scope.userList = true;
             $scope.rightMenuHide = true;
         });
@@ -69,7 +69,7 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
                         value.isChecked = false;
                     });
                     $rootScope.userEquipNum = dealerInfoVos.count;
-                    $scope.userDealer.equipNum = $rootScope.userEquipNum ;
+                    $scope.userDealer.equipNum = $rootScope.userEquipNum;
                     $scope.allPageNum = dealerInfoVos.pages;
                     $scope.pages = new Array(dealerInfoVos.pages);
                 }
@@ -118,11 +118,11 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
                     console.log(res);
                     $scope.equips = res.result;
                     $scope.pageIsActive = pagingParam.pageNum;
-                    if (pagingParam.dealerId === $rootScope.userAdmin.id){
+                    if (pagingParam.dealerId === $rootScope.userAdmin.id) {
                         $scope.pages = new Array($filter('ceil')($rootScope.userEquipNum / $scope.pageSize));
                     } else {
                         $scope.subordinateDealers.forEach(function (v, i) {
-                            if ($filter('ceil')(v.userId) === $filter('ceil')(pagingParam.dealerId)){
+                            if ($filter('ceil')(v.userId) === $filter('ceil')(pagingParam.dealerId)) {
                                 let equipNum = v.equipNum;
                                 $scope.pages = new Array($filter('ceil')(equipNum / $scope.pageSize));
                             }
@@ -141,13 +141,13 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
     };
     // 上一页
     $scope.prevClick = function () {
-        if ($scope.pageIsActive > 1){
+        if ($scope.pageIsActive > 1) {
             $scope.getEquipByPage($scope.pageSize, $scope.pageIsActive - 1);
         }
     };
     // 下一页
     $scope.nextClick = function () {
-        if ($scope.pageIsActive < $scope.pages.length){
+        if ($scope.pageIsActive < $scope.pages.length) {
             $scope.getEquipByPage($scope.pageSize, $scope.pageIsActive + 1);
         }
     };
@@ -157,7 +157,7 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
     };
     $scope.$on('dealerData', function (dealerData, data) {
         $scope.subordinateDealers.forEach(function (value, index) {
-            if ($filter('integer')(value.userId) === $filter('integer')(data.id)){
+            if ($filter('integer')(value.userId) === $filter('integer')(data.id)) {
                 value.userName = data.userName;
             }
         });
@@ -227,7 +227,7 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
     });
     $scope.$on('dealerInfoChange', function (event, data) {
         $scope.subordinateDealers.forEach(function (value, index) {
-            if ($filter('integer')(value.userId) === $filter('integer')(data.id)){
+            if ($filter('integer')(value.userId) === $filter('integer')(data.id)) {
                 value.userName = data.userName;
             }
         });
@@ -352,7 +352,7 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
     };
     // 导出Excel
     $scope.exportExcel = function () {
-        let blob = new Blob(['name:3324','age:15',4,2,2,2,2,2,4], {type: "application/vnd.ms-excel"});
+        let blob = new Blob(['name:3324', 'age:15', 4, 2, 2, 2, 2, 2, 4], {type: "application/vnd.ms-excel"});
         // application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
         // application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8
         // application/vnd.ms-excel
@@ -366,7 +366,7 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
             a.click();
             URL.revokeObjectURL(objectUrl);
             $timeout.cancel(timer);
-        },1);
+        }, 1);
     };
     // 搜客户
     $scope.searchCustomers = function () {
@@ -452,7 +452,7 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
         $scope.dealerActive = index;
         $scope.queryInfoByEmail($scope.subordinateDealers[index].email, $scope.subordinateDealers[index].equipNum);
     };
-    $scope.queryInfoByEmail = function(email, num){
+    $scope.queryInfoByEmail = function (email, num) {
         let param = {
             'info': email
         };

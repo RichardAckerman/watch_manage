@@ -27,8 +27,10 @@
                     <div class="form-group">
                         <label for="uEquipPhone" class="col-sm-3 control-label">设备手机号 :</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="uEquipPhone" ng-model="equipForm.sim"
-                                   placeholder="{{equip.sim}}">
+                            <span id="uEquipPhone" class="equip-phone" ng-bind="equip.sim"></span>
+                            <button type="button" class="btn clearPhone" ng-disabled="equip.sim === undefined"
+                                    ng-click="clearPhone()">清空
+                            </button>
                         </div>
                     </div>
                     <div class="form-group">
@@ -41,7 +43,8 @@
                     </div>
                 </div>
                 <div class="modal-footer equip-info-footer">
-                    <button type="button" class="btn" ng-click="updEquip()"  ng-disabled="equipForm.$pristine">保存</button>
+                    <button type="button" class="btn" ng-click="updEquip()" ng-disabled="equipForm.$pristine">保存
+                    </button>
                     <button type="button" class="btn" data-dismiss="modal">取消</button>
                 </div>
             </form>

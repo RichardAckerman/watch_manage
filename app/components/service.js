@@ -11,7 +11,7 @@ service.value('errorMsg', {
     },
     imeiError: {
         imeiEmpty: '请输入IMEI号',
-        imeiFormat: '请输入15位IMEI号'
+        imeiFormat: '请输入10到15位IMEI号'
     },
     loginGetaway: '登录过期,请再次登录!',
     serviceException: '服务器异常,请联系管理员!',
