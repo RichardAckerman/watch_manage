@@ -15,7 +15,14 @@ addCustomer.controller('addCustomerCtrl',
                     closeWind.close('.notice', $scope);
                     return;
                 }
-                let regex =/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+                let regName = /^[\u4e00-\u9fa5a-zA-Z0-9_]{1,10}$/g;
+                if (!regName.test($scope.userName)) {
+                    $scope.warnMessage = errorMsg.registerMsg.name;
+                    $scope.warnMsg = false;
+                    closeWind.close('.notice', $scope);
+                    return;
+                }
+                let regex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
                 if (!regex.test($scope.email) || $scope.email === undefined || $scope.email === '') {
                     $scope.warnMessage = errorMsg.email;
                     $scope.warnMsg = false;

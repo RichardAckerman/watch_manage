@@ -115,7 +115,6 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
             .queryPage(pagingParam)
             .success(function (res) {
                 if (res.code === 200) {
-                    console.log(res);
                     $scope.equips = res.result;
                     $scope.pageIsActive = pagingParam.pageNum;
                     if (pagingParam.dealerId === $rootScope.userAdmin.id) {
@@ -350,24 +349,6 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
                 });
         });
     };
-    // 导出Excel
-    $scope.exportExcel = function () {
-        let blob = new Blob(['name:3324', 'age:15', 4, 2, 2, 2, 2, 2, 4], {type: "application/vnd.ms-excel"});
-        // application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-        // application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8
-        // application/vnd.ms-excel
-        let objectUrl = URL.createObjectURL(blob);
-        let a = document.createElement('a');
-        document.body.appendChild(a);
-        a.setAttribute('style', 'display:none');
-        a.setAttribute('href', objectUrl);
-        a.setAttribute('download', '信息.xls');
-        let timer = $timeout(function () {
-            a.click();
-            URL.revokeObjectURL(objectUrl);
-            $timeout.cancel(timer);
-        }, 1);
-    };
     // 搜客户
     $scope.searchCustomers = function () {
         if ($scope.searchParams === undefined || $scope.searchParams === '') {
@@ -381,6 +362,7 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
         dealer.queryByEmail(data)
             .success(function (res) {
                 if (res.code === 200 && res.result !== undefined) {
+                    res.result.queryType = data.info.indexOf('@') === -1 ? 'name' : 'email';
                     $scope.$broadcast('myCustomerInfo', res.result);
                     angular.element('#searchCustomers').modal('toggle');
                 } else if (res.code === 408) {
@@ -402,11 +384,12 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
             angular.element('.bs-example-modal-sm').modal('toggle');
             return;
         }
-        let reg = /^\d{15}$/g;
+        let reg = /(^[\d]{10}$)|(^[\d]{15}$)/g;
         if (reg.test($scope.searchParams)) {
             library.queryByImei($scope.searchParams)
                 .success(function (res) {
                     if (res.code === 200 && res.result !== undefined) {
+                        res.result.queryType = 'imei';
                         $scope.$broadcast('equipInfo', res.result);
                         angular.element('#searchEquips').modal('toggle');
                     } else if (res.code === 408) {
@@ -425,6 +408,7 @@ customer.controller('customerCtrl', function ($rootScope, $scope, indexService, 
                 .queryByName($scope.searchParams)
                 .success(function (res) {
                     if (res.code === 200 && res.result !== undefined) {
+                        res.result.queryType = 'name';
                         $scope.$broadcast('equipInfo', res.result);
                         angular.element('#searchEquips').modal('toggle');
                     } else if (res.code === 408) {

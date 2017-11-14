@@ -1,19 +1,20 @@
 @charset "UTF-8";
 @import "../assets/css/color";
-.add-equip-modal.head-info-modal{
+
+.add-equip-modal.head-info-modal {
   width: 344px;
   height: 243px;
-  .head-info-body{
+  .head-info-body {
     padding: 30px 0 0 55px
   }
-  .add-equip-textarea{
+  .add-equip-textarea {
     width: 172px;
     height: 87px;
     resize: none;
   }
-  .head-info-footer{
+  .head-info-footer {
     text-align: center;
-    .btn{
+    .btn {
       margin-right: 0;
     }
   }

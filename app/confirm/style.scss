@@ -1,16 +1,17 @@
 @charset "UTF-8";
 @import "../assets/css/color";
-.head-info-modal.my-model-content{
+
+.head-info-modal.my-model-content {
   width: auto;
   height: auto;
-  .modal-body{
+  .modal-body {
     background: $background_head;
     color: $font_color_white;
   }
-  .modal-footer{
+  .modal-footer {
     text-align: center;
-    button.btn{
-      margin:0 ;
+    button.btn {
+      margin: 0;
     }
   }
 }

@@ -39,7 +39,7 @@ transferEquip.controller('moveEquipCtrl', function ($scope, library, closeWind, 
         $scope.currentUser = data.userId;
     });
     $scope.del = function (i) {
-        $scope.equips.splice(i,1);
+        $scope.equips.splice(i, 1);
     };
     $scope.pushEquip = function () {
         if ($scope.imeiNumber === '' || $scope.imeiNumber === undefined) {
@@ -109,7 +109,7 @@ transferEquip.controller('moveEquipCtrl', function ($scope, library, closeWind, 
             ids: [],
             newDealerId: $scope.aimCusId
         };
-        if (parseInt($scope.currentUser) === parseInt($scope.aimCusId)){
+        if (parseInt($scope.currentUser) === parseInt($scope.aimCusId)) {
             $scope.$emit('transformEquip', {msg: errorMsg.duplication, sign: false});
             return false;
         }

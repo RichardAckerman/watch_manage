@@ -11,7 +11,8 @@ service.value('errorMsg', {
     },
     imeiError: {
         imeiEmpty: '请输入IMEI号',
-        imeiFormat: '请输入10到15位IMEI号'
+        imeiFormat: '请输入10位或15位IMEI号',
+        name: '设备名不能是纯数字'
     },
     loginGetaway: '登录过期,请再次登录!',
     serviceException: '服务器异常,请联系管理员!',
@@ -23,7 +24,10 @@ service.value('errorMsg', {
     duplication: '不能转移给自己',
     emptyUserName: '请输入客户名称',
     phoneError: '电话号码格式不对',
-    delFail: '不能删除该客户!请先转移设备后再试!'
+    delFail: '不能删除该客户!请先转移设备后再试!',
+    registerMsg: {
+        name: '用户名仅支持中英文、数字和下划线,且不能超过10个字符'
+    }
 });
 service.value('ordinaryMsg', {
     myInfo: '我的信息',
@@ -98,13 +102,13 @@ service.factory('confirmService', function ($modal, $q) {
                 controller: 'ModalInstanceCtrl',
                 size: 'sm',
                 resolve: {
-                    data : function(){
+                    data: function () {
                         return {modalContent: modalContent};
                     }
                 }
             });
             modalInstance.result.then(function () {
-                if(!!modalInstance) {
+                if (!!modalInstance) {
                     modalInstance.dismiss('cancel');
                 }
                 deferred.resolve();

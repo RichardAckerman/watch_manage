@@ -81,10 +81,10 @@
         padding-left: 30px;
         padding-top: 10px;
         background-color: $background_head;
-        .add-button{
+        .add-button {
           padding: 0;
           text-align: center;
-          a{
+          a {
             color: $font_color_white;
           }
         }
@@ -133,9 +133,9 @@
       .customer-table {
         margin-left: -15px;
         .customer-table-body {
-          .customer-table-link{
+          .customer-table-link {
             &:hover {
-              background-color: $background_list ;
+              background-color: $background_list;
             }
           }
         }
@@ -143,7 +143,7 @@
           background-color: $font_color_white;
           ul {
             margin: 9px 0;
-            a.active{
+            a.active {
               background: $background_head;
               color: $font_color_white;
             }

@@ -12,7 +12,7 @@ rightMenu.controller('rightMenuCtrl', ['$scope', 'dealer', 'pathLogin', 'errorMs
         $scope.dealerInfo = data ? data : {};
     });
     $scope.menuFun = function (param) {
-        switch (param){
+        switch (param) {
             case 'addCus':
                 angular.element('#addCustomer').modal('toggle');
                 break;

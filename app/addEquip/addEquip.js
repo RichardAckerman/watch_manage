@@ -7,7 +7,7 @@ addEquip.controller('addEquipCtrl', ["$scope", "$rootScope", "library", "closeWi
         $scope.dealerInfo = data;
     });
     $scope.addEquip = function () {
-        let reg = /^\d{10,15}$/g;
+        let reg = /(^[\d]{10}$)|(^[\d]{15}$)/g;
         if (!reg.test($scope.imei)) {
             $scope.warnMessage = errorMsg.imeiError.imeiFormat;
             $scope.warnMsg = false;
@@ -15,9 +15,9 @@ addEquip.controller('addEquipCtrl', ["$scope", "$rootScope", "library", "closeWi
             return false;
         }
         let data = {
-            'imei' : $scope.imei,
-            'dealerId':$scope.dealerInfo.id,
-            'superiorId':$scope.dealerInfo.superiorId,
+            'imei': $scope.imei,
+            'dealerId': $scope.dealerInfo.id,
+            'superiorId': $scope.dealerInfo.superiorId,
         };
         library
             .put(data)

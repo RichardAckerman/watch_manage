@@ -15,7 +15,8 @@
                     <div class="form-group form-inline">
                         <label for="aim-custom" class="col-sm-2 control-label">目标客户&nbsp;</label>
                         <div class="col-sm-10">
-                            <input type="text" id="aim-custom" class="form-control" ng-model="aimCustomer" placeholder="请选择" ng-disabled="true">
+                            <input type="text" id="aim-custom" class="form-control" ng-model="aimCustomer"
+                                   placeholder="请选择" ng-disabled="true">
                             <input type="hidden" ng-model="aimCusId">
                             <button type="button" class="btn pull-down-btn" ng-click="dropDown($event)">&nbsp;</button>
                         </div>
@@ -44,7 +45,8 @@
                                 <td class="text-center">{{equip.imei}}</td>
                                 <td class="text-center">{{equip.dealerName}}</td>
                                 <td class="text-center">
-                                    <a href="javascript:void(0);" class="customer-table-link" ng-click="del($index)">删除</a>
+                                    <a href="javascript:void(0);" class="customer-table-link"
+                                       ng-click="del($index)">删除</a>
                                 </td>
                             </tr>
                             <tr class="customer-table-tr3">

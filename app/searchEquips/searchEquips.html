@@ -11,11 +11,17 @@
             </div>
             <div class="modal-body form-horizontal">
                 <div class="search-customer-table">
-                    <p>搜索到 <span>{{recordNum}}</span> 条记录</p>
+                    <p>
+                        搜索到
+                        <span ng-show="equip.queryType === 'imei'">IMEI号为 {{equip.imei}} </span>
+                        <span ng-show="equip.queryType !== 'imei'">设备名称为 {{equip.equipName}} </span>
+                        的 <span>{{recordNum}}</span> 条记录
+                    </p>
                     <table class="table table-striped" style="margin-bottom: 20px;">
                         <thead>
                         <tr class="customer-table-head">
                             <th class="text-center">名称</th>
+                            <th class="text-center">IMEI号</th>
                             <th class="text-center">所属用户</th>
                             <th class="text-center">设备手机号</th>
                             <th class="text-center">创建时间</th>
@@ -25,13 +31,17 @@
                         <tbody class="customer-table-body">
                         <tr class="customer-table" ng-hide="equip == undefined">
                             <td class="text-center">{{equip.equipName}}</td>
+                            <td class="text-center">{{equip.imei}}</td>
                             <td class="text-center"></td>
                             <td class="text-center">{{equip.sim | inactive:equip.libraryStatus}}</td>
                             <td class="text-center">{{equip.createTime}}</td>
                             <td class="text-center">
-                                <a href="javascript:void(0);" class="customer-table-link" ng-click="transferCus($event, equip)">转移</a> |
-                                <a href="javascript:void(0);" class="customer-table-link" ng-click="updateEquip()">修改</a> |
-                                <a href="javascript:void(0);" class="customer-table-link" ng-click="removeEquip(equip.id)">删除</a>
+                                <a href="javascript:void(0);" class="customer-table-link"
+                                   ng-click="transferCus($event, equip)">转移</a> |
+                                <a href="javascript:void(0);" class="customer-table-link"
+                                   ng-click="updateEquip()">修改</a> |
+                                <a href="javascript:void(0);" class="customer-table-link"
+                                   ng-click="removeEquip(equip.id)">删除</a>
                             </td>
                         </tr>
                         </tbody>
@@ -54,8 +64,10 @@
                             <td class="text-center">{{customer.linkman}}</td>
                             <td class="text-center">{{customer.dealerPhone}}</td>
                             <td class="text-center">
-                                <a href="javascript:void(0);" class="customer-table-link" ng-click="showCustomer()">查看</a> |
-                                <a href="javascript:void(0);" class="customer-table-link" ng-click="showPosition()">定位监控</a>
+                                <a href="javascript:void(0);" class="customer-table-link"
+                                   ng-click="showCustomer()">查看</a> |
+                                <a href="javascript:void(0);" class="customer-table-link"
+                                   ng-click="showPosition()">定位监控</a>
                             </td>
                         </tr>
                         </tbody>

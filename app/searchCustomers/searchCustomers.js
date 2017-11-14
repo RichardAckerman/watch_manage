@@ -17,4 +17,4 @@ searchCustomers.controller('searchCustomersCtrl',
                 $timeout.cancel(timer);
             }, 500);
         }
-}]);
+    }]);

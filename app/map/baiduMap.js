@@ -1,7 +1,7 @@
 'use strict';
 
 let baiduMap = angular.module('watchApp.baiduMap', []);
-baiduMap.controller("baiduMapCtrl",["$scope", function ($scope) {
+baiduMap.controller("baiduMapCtrl", ["$scope", function ($scope) {
     $scope.map = new BMap.Map("baiduContainer");
     $scope.point = new BMap.Point(114.026033, 22.559138);  // 创建点坐标
     $scope.map.centerAndZoom($scope.point, 14);
@@ -22,21 +22,21 @@ baiduMap.controller("baiduMapCtrl",["$scope", function ($scope) {
     $scope.map.setCurrentCity("深圳");
     $scope.pointCoordinate = {};
     //点击事件
-    $scope.map.addEventListener("click", function(e){
+    $scope.map.addEventListener("click", function (e) {
         let pt = e.point;
-        new BMap.Geocoder().getLocation(pt, function(rs){
+        new BMap.Geocoder().getLocation(pt, function (rs) {
             if (rs === undefined && rs === null) {
                 return false;
             }
             let addComp = rs.addressComponents;
-            let site = addComp.province  + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+            let site = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
             $scope.$emit('getAddress', site);
         });
     });
     //拖拽事件
-    $scope.map.addEventListener("dragend", function(e){
+    $scope.map.addEventListener("dragend", function (e) {
         if ($scope.isCenterFlag) {
-            if($scope.pointCoordinate.lng === undefined){
+            if ($scope.pointCoordinate.lng === undefined) {
                 return false;
             }
             $scope.map.centerAndZoom(new BMap.Point($scope.pointCoordinate.lng, $scope.pointCoordinate.lat), 14);
@@ -44,9 +44,9 @@ baiduMap.controller("baiduMapCtrl",["$scope", function ($scope) {
         }
     });
     //放大事件
-    $scope.map.addEventListener("zoomend", function(e){
+    $scope.map.addEventListener("zoomend", function (e) {
         if ($scope.isCenterFlag) {
-            if($scope.pointCoordinate.lng === undefined){
+            if ($scope.pointCoordinate.lng === undefined) {
                 return false;
             }
             $scope.map.panTo(new BMap.Point($scope.pointCoordinate.lng, $scope.pointCoordinate.lat));
@@ -60,21 +60,21 @@ baiduMap.controller("baiduMapCtrl",["$scope", function ($scope) {
         }
         let point = new BMap.Point(val.lng, val.lat);
         let marker = new BMap.Marker(point, {  // 创建标注
-            icon:new BMap.Icon(src, new BMap.Size(32,41))
+            icon: new BMap.Icon(src, new BMap.Size(32, 41))
         });
-        let label = new BMap.Label(val.name,{offset:new BMap.Size(37,6)}); // 创建名字
+        let label = new BMap.Label(val.name, {offset: new BMap.Size(37, 6)}); // 创建名字
         label.setStyle({
-            color : "#666",
+            color: "#666",
             borderColor: "#ffa423",
-            fontSize : "12px",
-            height : "20px",
-            lineHeight : "0",
-            fontFamily:"微软雅黑",
-            maxWidth:'none',
+            fontSize: "12px",
+            height: "20px",
+            lineHeight: "0",
+            fontFamily: "微软雅黑",
+            maxWidth: 'none',
             padding: '10px'
         });
         let infoOpts = {
-            enableMessage:true//设置允许信息窗发送短息
+            enableMessage: true//设置允许信息窗发送短息
         };
         let msg = `
             <p>${val.name}</p>
@@ -88,15 +88,15 @@ baiduMap.controller("baiduMapCtrl",["$scope", function ($scope) {
         marker.setLabel(label);
         marker.setAnimation(BMAP_ANIMATION_DROP);
         if (val.isActive) {
-            $scope.map.openInfoWindow(new BMap.InfoWindow(msg,infoOpts),point); //开启信息窗口
+            $scope.map.openInfoWindow(new BMap.InfoWindow(msg, infoOpts), point); //开启信息窗口
             $scope.pointCoordinate.lng = val.lng;
             $scope.pointCoordinate.lat = val.lat;
         }
-        marker.addEventListener("click",function (e) {
+        marker.addEventListener("click", function (e) {
             let p = e.target;
             $scope.pointCoordinate.lng = p.getPosition().lng;
             $scope.pointCoordinate.lat = p.getPosition().lat;
-            $scope.map.openInfoWindow(new BMap.InfoWindow(msg,infoOpts),point); //开启信息窗口
+            $scope.map.openInfoWindow(new BMap.InfoWindow(msg, infoOpts), point); //开启信息窗口
             if ($scope.isCenterFlag) {
                 $scope.map.panTo(new BMap.Point($scope.pointCoordinate.lng, $scope.pointCoordinate.lat));
                 $scope.map.disableInertialDragging();
@@ -110,7 +110,7 @@ baiduMap.controller("baiduMapCtrl",["$scope", function ($scope) {
     $scope.$on('clockCenterFlag', function (event, data) {
         $scope.isCenterFlag = data;
         if (data) {
-            if($scope.pointCoordinate.lng === undefined){
+            if ($scope.pointCoordinate.lng === undefined) {
                 return false;
             }
             $scope.map.panTo(new BMap.Point($scope.pointCoordinate.lng, $scope.pointCoordinate.lat));
@@ -134,12 +134,12 @@ baiduMap.controller("baiduMapCtrl",["$scope", function ($scope) {
                 return false;
             }
             $scope.map.panTo(new BMap.Point(data.currentEquip.lng, data.currentEquip.lat));
-            new BMap.Geocoder().getLocation({lng: data.currentEquip.lng, lat: data.currentEquip.lat}, function(rs){
-                if (rs === undefined || rs === null){
+            new BMap.Geocoder().getLocation({lng: data.currentEquip.lng, lat: data.currentEquip.lat}, function (rs) {
+                if (rs === undefined || rs === null) {
                     return false;
                 }
                 let addComp = rs.addressComponents;
-                let site = addComp.province  + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+                let site = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
                 $scope.$emit('getAddress', site);
             });
         } else {

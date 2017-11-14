@@ -1,7 +1,7 @@
 'use strict';
 
 let googleMap = angular.module('watchApp.googleMap', []);
-googleMap.controller("googleMapCtrl",["$scope", "$window", function ($scope,$window) {
+googleMap.controller("googleMapCtrl", ["$scope", "$window", function ($scope, $window) {
     $scope.point = {lat: 22.560118, lng: 114.004252};
     $scope.map = new google.maps.Map(document.getElementById("googleContainer"), {//创建谷歌地图
         center: $scope.point,                       //地图的中心点
@@ -9,13 +9,13 @@ googleMap.controller("googleMapCtrl",["$scope", "$window", function ($scope,$win
         mapTypeId: google.maps.MapTypeId.ROADMAP,   //指定地图展示类型：卫星图像、普通道路
         scrollwheel: true,          　　　　　　　　　 //是否允许滚轮滑动进行缩放
         zoomControlOptions: {
-            position:google.maps.ControlPosition.TOP_LEFT
+            position: google.maps.ControlPosition.TOP_LEFT
         },
         mapTypeControlOptions: {
-            position:google.maps.ControlPosition.TOP_RIGHT
+            position: google.maps.ControlPosition.TOP_RIGHT
         },
         streetViewControlOptions: {
-            position:google.maps.ControlPosition.TOP_LEFT
+            position: google.maps.ControlPosition.TOP_LEFT
         },
         scaleControl: true,
     });
@@ -24,7 +24,7 @@ googleMap.controller("googleMapCtrl",["$scope", "$window", function ($scope,$win
     });
     $scope.getAddress = function (e) {
         let geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ location: e.latLng }, function geoResults(results, status) {
+        geocoder.geocode({location: e.latLng}, function geoResults(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
                 $scope.$emit('getAddress', results[0].formatted_address);
             }
@@ -32,7 +32,7 @@ googleMap.controller("googleMapCtrl",["$scope", "$window", function ($scope,$win
     };
     $scope.map.addListener('idle', function () { //地图闲置时触发
         if ($scope.isCenterFlag) {
-            if($scope.pointCoordinate.lng === undefined)
+            if ($scope.pointCoordinate.lng === undefined)
                 return false;
             $scope.map.panTo($scope.pointCoordinate);
         }
@@ -91,7 +91,7 @@ googleMap.controller("googleMapCtrl",["$scope", "$window", function ($scope,$win
             $scope.pointCoordinate.lng = val.lng;
             $scope.pointCoordinate.lat = val.lat;
         }
-        marker.addListener('click', function(e) {
+        marker.addListener('click', function (e) {
             angular.element('.gm-style-iw').parent().css('display', 'none');
             infoWindow.open($scope.map, marker);
             $scope.pointCoordinate.lng = e.latLng.lng();
@@ -110,7 +110,7 @@ googleMap.controller("googleMapCtrl",["$scope", "$window", function ($scope,$win
     $scope.$on('clockCenterFlag', function (event, data) {
         $scope.isCenterFlag = data;
         if (data) {
-            if($scope.pointCoordinate.lng === undefined)
+            if ($scope.pointCoordinate.lng === undefined)
                 return false;
             $scope.map.panTo($scope.pointCoordinate);
         } else {
@@ -139,7 +139,12 @@ googleMap.controller("googleMapCtrl",["$scope", "$window", function ($scope,$win
             }
             $scope.map.panTo({lng: data.currentEquip.lng, lat: data.currentEquip.lat});
             let geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ location: {lat: data.currentEquip.lat, lng: data.currentEquip.lng} }, function geoResults(results, status) {
+            geocoder.geocode({
+                location: {
+                    lat: data.currentEquip.lat,
+                    lng: data.currentEquip.lng
+                }
+            }, function geoResults(results, status) {
                 if (status === google.maps.GeocoderStatus.OK) {
                     $scope.$emit('getAddress', results[0].formatted_address);
                 }

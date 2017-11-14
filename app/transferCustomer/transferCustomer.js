@@ -1,10 +1,10 @@
 'use strict';
 
 let transferCustomer = angular.module('watchApp.transferCustomer', []);
-transferCustomer.controller('transferCustomerCtrl',['$scope', 'library', 'errorMsg', 'pathLogin', 'closeWind',
+transferCustomer.controller('transferCustomerCtrl', ['$scope', 'library', 'errorMsg', 'pathLogin', 'closeWind',
     function ($scope, library, errorMsg, pathLogin, closeWind) {
         $scope.allUser = null;
-        $scope.$on('allUserInfo',function (event,data) {
+        $scope.$on('allUserInfo', function (event, data) {
             $scope.allUser = data;
         });
         $scope.$on('transformInfo', function (event, data) {
@@ -19,7 +19,7 @@ transferCustomer.controller('transferCustomerCtrl',['$scope', 'library', 'errorM
             if ($scope.equipId === undefined) {
                 $scope.$emit('batchTrans', user);
             } else {
-                if (parseInt(user.userId) === parseInt($scope.userId)){
+                if (parseInt(user.userId) === parseInt($scope.userId)) {
                     $scope.$emit('transformEquip', {msg: errorMsg.duplication, sign: false});
                     return false;
                 }

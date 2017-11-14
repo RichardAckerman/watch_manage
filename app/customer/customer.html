@@ -9,28 +9,34 @@
         </ol>
         <div class="customer-breadcrumb-input col-md-4">
             <input type="text" placeholder="设备名称/IMEI号/客户名/帐号" size="30px" ng-model="searchParams">
-            <button class="btn btn-default btn-xs customer-button-style" ng-click="searchEquips()" type="button">搜设备</button>
-            <button class="btn btn-default btn-xs customer-button-style" ng-click="searchCustomers()" type="button">搜客户</button>
+            <button class="btn btn-default btn-xs customer-button-style" ng-click="searchEquips()" type="button">搜设备
+            </button>
+            <button class="btn btn-default btn-xs customer-button-style" ng-click="searchCustomers()" type="button">
+                搜客户
+            </button>
         </div>
     </div>
     <div class="row font customer-list">
         <div class="col-md-2 customer-list-head">
             <div class="row customer-list-row font-head">
                 <div class="col-md-8 font-head-small">客户列表</div>
-                <div class="col-md-4 add-button"><img src="https://so360.org/static/add.png" class="customer-list-image">
+                <div class="col-md-4 add-button"><img src="https://so360.org/static/add.png"
+                                                      class="customer-list-image">
                     <a href="javascript:void(0)" ng-click="addCustomer()">新增</a></div>
             </div>
             <div class="customer-right-nav">
-                <div class="customer-right-nav-father" data-toggle="collapse" data-target=".child" ng-click="superiorSelected()">
+                <div class="customer-right-nav-father" data-toggle="collapse" data-target=".child"
+                     ng-click="superiorSelected()">
                     <img src="https://so360.org/static/customer_group.png" alt="father">
                     <a href="javascript:void(0);" ng-class="{active : isActive === 1}">
-                       {{userAdmin.userName}}({{userEquipNum}})
+                        {{userAdmin.userName}}({{userEquipNum}})
                     </a>
                 </div>
                 <div class="child" ng-repeat="subordinateDealer in subordinateDealers">
                     <div class="customer-right-nav-child">
                         <img src="https://so360.org/static/customer_one.png" alt="child">
-                        <a href="javascript:void(0);" ng-click="listActive($index)" data-index="{{$index}}" contextmenu ng-class="{active : dealerActive === $index}">{{subordinateDealer.userName}}
+                        <a href="javascript:void(0);" ng-click="listActive($index)" data-index="{{$index}}" contextmenu
+                           ng-class="{active : dealerActive === $index}">{{subordinateDealer.userName}}
                             ({{subordinateDealer.equipNum}})</a>
                     </div>
                 </div>
@@ -69,7 +75,8 @@
                     <div class="cus-con-bcb">
                         <a href="javascript:void(0);" class="cus-con-bcb-link-index" ng-click="moveEquip()">批量转移</a>
                         <a href="javascript:void(0);" class="cus-con-bcb-link" ng-click="delInBatch()">批量删除</a>
-                        <a href="javascript:void(0);" class="cus-con-bcb-link" ng-click="exportExcel()">导出Excel</a>
+                        <a href="//192.168.1.108/watch/toExcelByDealerId/dealerId/{{userDealer.id}}"
+                           class="cus-con-bcb-link">导出Excel</a>
                         <a href="javascript:void(0);" class="cus-con-bcb-link" ng-click="addEquip()" ng-show="isAdmin">添加设备</a>
                     </div>
                 </div>
@@ -95,7 +102,8 @@
                         <tr class="customer-table" ng-repeat="equip in equips">
                             <td class="text-center">
                                 <label>
-                                    <input type="checkbox" ng-model="equip.isChecked" ng-click="singleClick()" ng-bind="equip.id">
+                                    <input type="checkbox" ng-model="equip.isChecked" ng-click="singleClick()"
+                                           ng-bind="equip.id">
                                 </label>
                             </td>
                             <td class="text-center">
@@ -118,9 +126,11 @@
                             </td>
                             <td class="text-center">
                             <span>
-                                <a href="javascript:void(0);" class="customer-table-link" ng-click="transferCustomer($event, equip.id)">转移</a> |
+                                <a href="javascript:void(0);" class="customer-table-link"
+                                   ng-click="transferCustomer($event, equip.id)">转移</a> |
                                 <a href="javascript:void(0);" class="customer-table-link" ng-click="updateEquip(equip)">修改</a> |
-                                <a href="javascript:void(0);" class="customer-table-link" ng-click="removeEquip(equip.id)">删除</a>
+                                <a href="javascript:void(0);" class="customer-table-link"
+                                   ng-click="removeEquip(equip.id)">删除</a>
                             </span>
                             </td>
                         </tr>
@@ -142,7 +152,8 @@
                         <li><a href="javascript:void(0);" ng-click="prevClick()">&laquo;</a></li>
                         <li ng-repeat="page in pages track by $index"><a href="javascript:void(0);"
                                                                          ng-click="pagingQuery($index+1)"
-                                                                         ng-class="{'active':pageIsActive == $index+1}">{{$index+1}}</a></li>
+                                                                         ng-class="{'active':pageIsActive == $index+1}">{{$index+1}}</a>
+                        </li>
                         <li><a href="javascript:void(0);" ng-click="nextClick()">&raquo;</a></li>
                     </ul>
                 </div>
@@ -152,7 +163,8 @@
                             每页显示条数
                             <label>
                                 <select name="pageSize" ng-model="pageSize" ng-change="pageSizeChg()">
-                                    <option ng-repeat="value in allPageSize track by $index" value="{{value}}">{{value}}</option>
+                                    <option ng-repeat="value in allPageSize track by $index"
+                                            value="{{value}}">{{value}}</option>
                                 </select>
                             </label>
                             条
