@@ -5,7 +5,7 @@ editUserInfo.controller('editUserInfoCtrl', function ($scope, $rootScope, userIn
     $scope.sucMsg = true;
     $scope.updUserInfo = function () {
         let regName = /^[\u4e00-\u9fa5a-zA-Z0-9_]{1,10}$/g;
-        if (!regName.test($scope.userInfoForm.userName)) {
+        if ($scope.userInfoForm.userName !== undefined && $scope.userInfoForm.userName !== "" && !regName.test($scope.userInfoForm.userName)) {
             $scope.warnMessage = errorMsg.registerMsg.name;
             $scope.warnMsg = false;
             closeWind.close('.notice', $scope);

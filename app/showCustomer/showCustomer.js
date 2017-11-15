@@ -34,6 +34,13 @@ showCustomer.controller('showCustomerCtrl', ['$scope', 'userInfo', 'closeWind', 
                 });
         });
         $scope.updUserInfo = function () {
+            let regName = /^[\u4e00-\u9fa5a-zA-Z0-9_]{1,10}$/g;
+            if ($scope.userInfoForm.userName !== undefined && $scope.userInfoForm.userName !== "" && !regName.test($scope.userInfoForm.userName)) {
+                $scope.warnMessage = errorMsg.registerMsg.name;
+                $scope.warnMsg = false;
+                closeWind.close('.notice', $scope);
+                return;
+            }
             let phoneReg = /^1[3|4|5|8][0-9]\d{8}$/g;
             if ($scope.userInfoForm.dealerPhone !== '' && $scope.userInfoForm.dealerPhone !== undefined && !phoneReg.test($scope.userInfoForm.dealerPhone)) {
                 $scope.warnMessage = errorMsg.phoneError;

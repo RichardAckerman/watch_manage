@@ -1,7 +1,7 @@
 'use strict';
 
 let googleMap = angular.module('watchApp.googleMap', []);
-googleMap.controller("googleMapCtrl", ["$scope", "$window", function ($scope, $window) {
+googleMap.controller("googleMapCtrl", ["$scope", "$filter", function ($scope, $filter) {
     $scope.point = {lat: 22.560118, lng: 114.004252};
     $scope.map = new google.maps.Map(document.getElementById("googleContainer"), {//创建谷歌地图
         center: $scope.point,                       //地图的中心点
@@ -40,10 +40,12 @@ googleMap.controller("googleMapCtrl", ["$scope", "$window", function ($scope, $w
     $scope.pointCoordinate = {}; //当前选中点坐标
     $scope.mapMakers = [];
     $scope.createMark = function (val) {
-        let src = val.isOnline ? "map/online.png" : "map/offline.png";
+        let src = val.online ? "map/online.png" : "map/offline.png";
         if (val.lat === undefined) {
             return;
         }
+        val.lat = Number(val.lat);
+        val.lng = Number(val.lng);
         let marker = new google.maps.Marker({
             position: {lat: val.lat, lng: val.lng},
             icon: src,
@@ -51,12 +53,12 @@ googleMap.controller("googleMapCtrl", ["$scope", "$window", function ($scope, $w
             map: $scope.map
         });
         let html = `
-            <p>${val.name}</p>
-            <p>IMEI号：${val.imei}</p>
-            <p>状态：${val.isOnline}</p>
-            <p>电量：${val.electricity}</p>
-            <p>定位时间：${val.locationTime}</p>
-            <p>停留时间：${val.residenceTime}</p>
+             <p>${$filter('returnEmptyStr')(val.name)}</p>
+            <p>IMEI号：${$filter('returnEmptyStr')(val.imei)}</p>
+            <p>状态：${val.online ? '在线' : '离线'}</p>
+            <p>电量：${$filter('returnEmptyStr')(val.electricity)}%</p>
+            <p>定位时间：${$filter('returnEmptyStr')(val.locationTime)}</p>
+            <p>停留时间：${$filter('returnEmptyStr')(val.residenceTime)}</p>
         `;
         let infoWindow = new google.maps.InfoWindow({
             content: html,

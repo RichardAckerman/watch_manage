@@ -5,7 +5,7 @@ personalInfo.controller('personalCtrl', function ($scope, userInfo, closeWind, p
     $scope.sucMsg = true;
     $scope.updPersonal = function () {
         let regName = /^[\u4e00-\u9fa5a-zA-Z0-9_]{1,10}$/g;
-        if (!regName.test($scope.personalForm.userName)) {
+        if ($scope.personalForm.userName !== undefined && $scope.personalForm.userName !== "" && !regName.test($scope.personalForm.userName)) {
             $scope.warnMessage = errorMsg.registerMsg.name;
             $scope.warnMsg = false;
             closeWind.close('.notice', $scope);

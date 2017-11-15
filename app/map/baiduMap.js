@@ -1,7 +1,7 @@
 'use strict';
 
 let baiduMap = angular.module('watchApp.baiduMap', []);
-baiduMap.controller("baiduMapCtrl", ["$scope", function ($scope) {
+baiduMap.controller("baiduMapCtrl", ["$scope", "$filter", function ($scope, $filter) {
     $scope.map = new BMap.Map("baiduContainer");
     $scope.point = new BMap.Point(114.026033, 22.559138);  // 创建点坐标
     $scope.map.centerAndZoom($scope.point, 14);
@@ -54,7 +54,7 @@ baiduMap.controller("baiduMapCtrl", ["$scope", function ($scope) {
     });
     //创建点
     $scope.createMark = function (val) {
-        let src = val.isOnline ? "map/online.png" : "map/offline.png";
+        let src = val.online ? "map/online.png" : "map/offline.png";
         if (val.lat === undefined) {
             return;
         }
@@ -77,12 +77,12 @@ baiduMap.controller("baiduMapCtrl", ["$scope", function ($scope) {
             enableMessage: true//设置允许信息窗发送短息
         };
         let msg = `
-            <p>${val.name}</p>
-            <p>IMEI号：${val.imei}</p>
-            <p>状态：${val.isOnline}</p>
-            <p>电量：${val.electricity}</p>
-            <p>定位时间：${val.locationTime}</p>
-            <p>停留时间：${val.residenceTime}</p>
+            <p>${$filter('returnEmptyStr')(val.name)}</p>
+            <p>IMEI号：${$filter('returnEmptyStr')(val.imei)}</p>
+            <p>状态：${val.online ? '在线' : '离线'}</p>
+            <p>电量：${$filter('returnEmptyStr')(val.electricity)}%</p>
+            <p>定位时间：${$filter('returnEmptyStr')(val.locationTime)}</p>
+            <p>停留时间：${$filter('returnEmptyStr')(val.residenceTime)}</p>
         `;
         $scope.map.addOverlay(marker);
         marker.setLabel(label);

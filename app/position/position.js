@@ -207,6 +207,7 @@ position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "lo
                 window.event.returnValue = false;
             }
             $scope.searchCustomers(name);
+
             $scope.dealerInfo.forEach(function (value, key) {
                 value.isActive = value.userName === name;
                 if (value.equips !== undefined) {
@@ -268,7 +269,7 @@ position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "lo
                     value.isActive = false;
                     if (value.equips !== undefined) {
                         value.equips.forEach(function (v, k) {
-                            v.isActive = v.userName === data.userName;
+                            v.isActive = v.name === data.name;
                         });
                     }
                 });
@@ -279,3 +280,8 @@ position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "lo
             angular.element('.bs-example-modal-sm').modal('toggle');
         });
     }]);
+position.filter('returnEmptyStr', function () {
+    return function (value) {
+        return value === undefined || value === null ? '' : value
+    }
+});

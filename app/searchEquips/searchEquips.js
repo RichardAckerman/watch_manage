@@ -9,12 +9,12 @@ searchEquips.controller('searchEquipsCtrl', ["$scope", "library", "closeWind", "
             $scope.customer = undefined;
             $scope.equip = data;
             $scope.recordNum = data ? 1 : 0;
-            if (data.userId !== undefined) {
-                $scope.searchDealerSub(data.userId);
+            if (data.dealerId !== undefined) {
+                $scope.searchDealerSub(data.dealerId);
             }
         });
         $scope.searchDealerSub = function (id) {
-            dealer.queryById(180)
+            dealer.queryById(id)
                 .success(function (res) {
                     if (res.code === 200 && res.result !== undefined) {
                         $scope.customer = res.result;
