@@ -11,7 +11,6 @@ login.controller('loginCtrl', function ($scope, authService, $location, uuid, $t
     $scope.sucMsg = true;
     $scope.signInData = {};
     $scope.signInData.email = $window.localStorage['email'];
-    $scope.signInData.password = $window.localStorage['password'];
     if ($scope.signInData.email !== undefined) {
         $scope.remember = true;
     }
@@ -26,10 +25,8 @@ login.controller('loginCtrl', function ($scope, authService, $location, uuid, $t
                     let storage = $window.localStorage;
                     if ($scope.remember) {
                         storage['email'] = $scope.signInData.email;
-                        storage['password'] = $scope.signInData.password;
                     } else {
                         storage.removeItem("email");
-                        storage.removeItem("password");
                     }
                 } else {
                     $scope.warnMessage = res.msg;

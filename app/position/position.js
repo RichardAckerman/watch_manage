@@ -102,10 +102,10 @@ position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "lo
             });
         };
         // 搜设备
-        $scope.searchEquips = function () {
+        $scope.searchEquips = function (imei) {
             $scope.loading = true;
             let data = {
-                info: $scope.searchParams
+                info: imei ? imei : $scope.searchParams
             };
             let reg = /(^[\d]{10}$)|(^[\d]{15}$)/g;
             if (reg.test(data.info)) {
@@ -138,7 +138,7 @@ position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "lo
             }
             $scope.loading = false;
             if (json.code === 200) {
-                let result = json.result;
+                let result = json.result;  // todo 需要一个email，username为邮箱号
                 if (result.equips !== undefined) {
                     result.equips.forEach(function (v, k) {
                         if (v.imei === imei) {
@@ -154,7 +154,7 @@ position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "lo
                     v.isActive = v.userName === result.userName;
                     if (v.equips !== undefined) {
                         v.equips.forEach(function (val, index) {
-                            val.isActive = false;
+                            val.isActive = val.imei === imei;
                         });
                     }
                 });
@@ -219,21 +219,8 @@ position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "lo
             $scope.iconActive[index] = e.target.getAttribute('aria-expanded');
         };
         $scope.equipChoose = function (imei) {
-            let info = {};
-            $scope.dealerInfo.forEach(function (value, key) {
-                value.isActive = false;
-                if (value.equips !== undefined) {
-                    value.equips.forEach(function (v, k) {
-                        v.isActive = imei === v.imei;
-                        if (imei === v.imei) {
-                            info.customer = value;
-                            info.currentEquip = v;
-                        }
-                    });
-                }
-            });
+            $scope.searchEquips(imei);
             $scope.detailAddress = "";
-            $scope.$broadcast('currentEquips', info);
         };
         $scope.operatMenu = function (flag) {
             if (flag === 'close') {
@@ -278,6 +265,14 @@ position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "lo
         $scope.$on('errorInfo', function (event, data) {
             $scope.msgModal = data.msg;
             angular.element('.bs-example-modal-sm').modal('toggle');
+        });
+        // 刷新查询
+        $scope.$on('freshQuery', function (event, data) {
+            if (data.currentEquip !== undefined && data.currentEquip !== null) {
+                $scope.searchEquips(data.currentEquip.imei);
+            } else {
+                $scope.searchCustomers(data.customer.userName);
+            }
         });
     }]);
 position.filter('returnEmptyStr', function () {

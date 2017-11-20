@@ -1,7 +1,7 @@
 'use strict';
 
 let googleMap = angular.module('watchApp.googleMap', []);
-googleMap.controller("googleMapCtrl", ["$scope", "$filter", function ($scope, $filter) {
+googleMap.controller("googleMapCtrl", ["$scope", "$filter", "$timeout", "$interval", function ($scope, $filter, $timeout, $interval) {
     $scope.point = {lat: 22.560118, lng: 114.004252};
     $scope.map = new google.maps.Map(document.getElementById("googleContainer"), {//创建谷歌地图
         center: $scope.point,                       //地图的中心点
@@ -19,6 +19,49 @@ googleMap.controller("googleMapCtrl", ["$scope", "$filter", function ($scope, $f
         },
         scaleControl: true,
     });
+    $scope.createRefresh = function (time){
+        let div = document.getElementById('refreshDiv');
+        if (div) {
+            div.parentNode.removeChild(div);
+        }
+        let controlDiv = document.createElement('div');
+        controlDiv.id = 'refreshDiv';
+        let p = document.createElement('p');
+        let span = document.createElement('span');
+        span.id = 'refreshTime';
+        span.style.color = '#f00';
+        span.innerHTML = time;
+        p.appendChild(span);
+        p.style.background = '#fff';
+        p.style.padding = '5px';
+        p.style.marginTop = '20px';
+        p.innerHTML = p.innerHTML + '秒后刷新!';
+        controlDiv.appendChild(p);
+        $scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(controlDiv);
+    };
+    $scope.timer = null;
+    $scope.setTimer = function (data) { // 每隔15秒刷新坐标信息
+        let time = 15;
+        $interval.cancel($scope.timer);
+        $scope.createRefresh(time);
+        $scope.timer = $interval(function () {
+            time--;
+            let div = document.getElementById('refreshDiv');
+            if (div) {
+                document.getElementById('refreshTime').innerHTML = time;
+            } else {
+                $interval.cancel($scope.timer);
+            }
+            if (time < 0) {
+                $interval.cancel($scope.timer);
+                if (div) {
+                    div.parentNode.removeChild(div);
+                }
+                $scope.setTimer(data);
+                $scope.$emit('freshQuery', data);
+            }
+        }, 1000);
+    };
     $scope.map.addListener('click', function (e) {
         $scope.getAddress(e);
     });
@@ -46,6 +89,9 @@ googleMap.controller("googleMapCtrl", ["$scope", "$filter", function ($scope, $f
         }
         val.lat = Number(val.lat);
         val.lng = Number(val.lng);
+        let coordinate = wgs84togcj02(val.lng, val.lat);
+        val.lng = coordinate[0];
+        val.lat = coordinate[1];
         let marker = new google.maps.Marker({
             position: {lat: val.lat, lng: val.lng},
             icon: src,
@@ -56,9 +102,8 @@ googleMap.controller("googleMapCtrl", ["$scope", "$filter", function ($scope, $f
              <p>${$filter('returnEmptyStr')(val.name)}</p>
             <p>IMEI号：${$filter('returnEmptyStr')(val.imei)}</p>
             <p>状态：${val.online ? '在线' : '离线'}</p>
-            <p>电量：${$filter('returnEmptyStr')(val.electricity)}%</p>
+            <p>电量：${val.online ? $filter('returnEmptyStr')(val.electricity) + "%" : ""}</p>
             <p>定位时间：${$filter('returnEmptyStr')(val.locationTime)}</p>
-            <p>停留时间：${$filter('returnEmptyStr')(val.residenceTime)}</p>
         `;
         let infoWindow = new google.maps.InfoWindow({
             content: html,
@@ -85,11 +130,13 @@ googleMap.controller("googleMapCtrl", ["$scope", "$filter", function ($scope, $f
             pane: "floatPane",
             enableEventPropagation: false
         };
-
         let ib = new InfoBox(myOptions);
         ib.open($scope.map, marker); //显示名字
         if (val.isActive) {
-            infoWindow.open($scope.map, marker);  //开启信息窗口
+            let timer = $timeout(function () {
+                infoWindow.open($scope.map, marker);  //开启信息窗口
+                $timeout.cancel(timer);
+            },1);
             $scope.pointCoordinate.lng = val.lng;
             $scope.pointCoordinate.lat = val.lat;
         }
@@ -119,7 +166,9 @@ googleMap.controller("googleMapCtrl", ["$scope", "$filter", function ($scope, $f
             $scope.pointCoordinate = {};
         }
     });
-    $scope.$on('currentEquips', function (event, data) {
+    $scope.$on('currentEquips', function (event, info) {
+        let data = angular.copy(info);
+        $scope.setTimer(data);
         if (data.customer === undefined && data.customer === null) {
             return false;
         }
@@ -139,7 +188,6 @@ googleMap.controller("googleMapCtrl", ["$scope", "$filter", function ($scope, $f
                 $scope.$emit('errorInfo', {msg: '没有坐标信息'});
                 return false;
             }
-            $scope.map.panTo({lng: data.currentEquip.lng, lat: data.currentEquip.lat});
             let geocoder = new google.maps.Geocoder();
             geocoder.geocode({
                 location: {
@@ -155,4 +203,7 @@ googleMap.controller("googleMapCtrl", ["$scope", "$filter", function ($scope, $f
             $scope.pointCoordinate = {};
         }
     });
+    $scope.$on("$destroy", function() {
+        $interval.cancel($scope.timer);
+    })
 }]);

@@ -1,7 +1,7 @@
 'use strict';
 
 let api = angular.module('watchApp.api', []);
-const TEST = 'http://127.0.0.1:8080/watch';
+const TEST = 'http://192.168.1.254:8080/watch';
 const PRODUCT = 'https://so360.org/watch';
 const HOST = TEST;
 const API_LOGIN = HOST + '/adminSignIn';
