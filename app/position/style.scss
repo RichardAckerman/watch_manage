@@ -36,11 +36,12 @@
       display: inline-block;
       width: 9px;
       height: 13px;
-      background: url('../../map/icon.png') no-repeat -179px -120px;
+      background: url('../images/icon.png') no-repeat -179px -120px;
     }
   }
   .customer-list-head{
     padding-right: 0;
+    white-space: nowrap;
     .float-icon{
       right: 0;
       text-align: right;
@@ -71,9 +72,9 @@
           background: none;
           i{
             padding: 0 24px 0 0;
-            background: url("../../map/icon.png") no-repeat;
+            background: url("../images/icon.png") no-repeat;
             &.icon-close{
-              background: url("../../map/icon.png") no-repeat -236px -177px;
+              background: url("../images/icon.png") no-repeat -236px -177px;
             }
             &.icon-open{
               background-position: -175px -177px;

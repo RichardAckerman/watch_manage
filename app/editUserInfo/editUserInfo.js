@@ -1,6 +1,6 @@
 'use strict';
 let editUserInfo = angular.module('watchApp.editUserInfo', []);
-editUserInfo.controller('editUserInfoCtrl', function ($scope, $rootScope, userInfo, closeWind, pathLogin, errorMsg) {
+editUserInfo.controller('editUserInfoCtrl', ['$scope', '$rootScope', 'userInfo', 'closeWind', 'pathLogin', 'errorMsg', function ($scope, $rootScope, userInfo, closeWind, pathLogin, errorMsg) {
     $scope.warnMsg = true;
     $scope.sucMsg = true;
     $scope.updUserInfo = function () {
@@ -56,4 +56,4 @@ editUserInfo.controller('editUserInfoCtrl', function ($scope, $rootScope, userIn
         closeWind.cancel();
         pathLogin.cancel();
     });
-});
+}]);

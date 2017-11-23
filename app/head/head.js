@@ -1,7 +1,7 @@
 'use strict';
 
 let head = angular.module('watchApp.head', []);
-head.controller('headCtrl', function ($scope, authService, $location, confirmService, $window) {
+head.controller('headCtrl', ['$scope', 'authService', '$location', 'confirmService', '$window', function ($scope, authService, $location, confirmService, $window) {
     $scope.logOut = function () {
         let content = '确认退出吗？';
         confirmService.openConfirmWindow($scope, content).then(function () {
@@ -14,4 +14,4 @@ head.controller('headCtrl', function ($scope, authService, $location, confirmSer
         });
     };
     $scope.isActive = $location.url();
-});
+}]);

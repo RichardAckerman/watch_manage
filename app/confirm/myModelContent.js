@@ -1,6 +1,6 @@
 'use strict';
 let confirm = angular.module('watchApp.confirm', ['ui.bootstrap']);
-confirm.controller('ModalInstanceCtrl', function ($scope, $modalInstance, data) {
+confirm.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'data', function ($scope, $modalInstance, data) {
     $scope.modalContent = data.modalContent;
     $scope.ok = function () {
         $modalInstance.close();
@@ -8,4 +8,4 @@ confirm.controller('ModalInstanceCtrl', function ($scope, $modalInstance, data) 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     }
-});
+}]);

@@ -1,6 +1,6 @@
 'use strict';
 let personalInfo = angular.module('watchApp.personal', []);
-personalInfo.controller('personalCtrl', function ($scope, userInfo, closeWind, pathLogin, reloadRoute, errorMsg) {
+personalInfo.controller('personalCtrl', ['$scope', 'userInfo', 'closeWind', 'pathLogin', 'reloadRoute', 'errorMsg', function ($scope, userInfo, closeWind, pathLogin, reloadRoute, errorMsg) {
     $scope.warnMsg = true;
     $scope.sucMsg = true;
     $scope.updPersonal = function () {
@@ -53,4 +53,4 @@ personalInfo.controller('personalCtrl', function ($scope, userInfo, closeWind, p
         pathLogin.cancel();
         reloadRoute.cancel();
     });
-});
+}]);

@@ -63,7 +63,10 @@ gulp.task('min-image', function () {
 gulp.task('js', function () {
     return gulp.src([path.root + "/**/*.js",
         "!" + path.root + "/bower_components/**/*.js",
-        "!" + dist.root + "/**/*.js"])
+        "!" + dist.root + "/**/*.js",
+        "!" + path.root + "/components/version/interpolate-filter_test.js",
+        "!" + path.root + "/components/version/version-directive_test.js",
+        "!" + path.root + "/components/version/version_test.js"])
         .pipe(babel({
             presets: ['es2015']
         }))

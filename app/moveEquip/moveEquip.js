@@ -1,6 +1,6 @@
 'use strict';
 let transferEquip = angular.module('watchApp.moveEquip', []);
-transferEquip.controller('moveEquipCtrl', function ($scope, library, closeWind, pathLogin, errorMsg, dealer) {
+transferEquip.controller('moveEquipCtrl', ['$scope', 'library', 'closeWind', 'pathLogin', 'errorMsg', 'dealer', function ($scope, library, closeWind, pathLogin, errorMsg, dealer) {
     $scope.warnMsg = true;
     $scope.sucMsg = true;
     $scope.dropDown = function ($event) {
@@ -136,4 +136,4 @@ transferEquip.controller('moveEquipCtrl', function ($scope, library, closeWind, 
                 closeWind.close('#moveEquip', $scope);
             })
     }
-});
+}]);

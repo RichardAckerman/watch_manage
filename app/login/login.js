@@ -6,7 +6,7 @@ login.config(['$routeProvider', function ($routeProvider) {
         templateUrl: 'login/login.html',
     });
 }]);
-login.controller('loginCtrl', function ($scope, authService, $location, uuid, $timeout, errorMsg, $window) {
+login.controller('loginCtrl', ['$scope', 'authService', '$location', 'uuid', '$timeout', 'errorMsg', '$window', function ($scope, authService, $location, uuid, $timeout, errorMsg, $window) {
     $scope.warnMsg = true;
     $scope.sucMsg = true;
     $scope.signInData = {};
@@ -48,7 +48,7 @@ login.controller('loginCtrl', function ($scope, authService, $location, uuid, $t
                 }
             );
     };
-});
+}]);
 
 
 

@@ -78,7 +78,7 @@ baiduMap.controller("baiduMapCtrl", ["$scope", "$filter", "$interval", function 
     });
     //创建点
     $scope.createMark = function (val) {
-        let src = val.online ? "map/online.png" : "map/offline.png";
+        let src = val.online ? "../assets/images/online.png" : "../assets/images/offline.png";
         if (val.lat === undefined) {
             return;
         }

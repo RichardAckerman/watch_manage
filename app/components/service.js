@@ -40,7 +40,7 @@ service.value('ordinaryMsg', {
         failure: '删除失败'
     },
 });
-service.service('closeWind', function ($timeout) {
+service.service('closeWind', ['$timeout', function ($timeout) {
     let closePromise = null;
     let closeTimeout = function (windId, $scope) {
         closePromise = $timeout(function () {
@@ -55,8 +55,8 @@ service.service('closeWind', function ($timeout) {
     this.cancel = function () {
         $timeout.cancel(closePromise);
     }
-});
-service.service('pathLogin', function ($timeout, $location) {
+}]);
+service.service('pathLogin', ['$timeout', '$location', function ($timeout, $location) {
     let loginPromise = null;
     let loginTimeout = function ($scope) {
         loginPromise = $timeout(function () {
@@ -71,8 +71,8 @@ service.service('pathLogin', function ($timeout, $location) {
     this.cancel = function () {
         $timeout.cancel(loginPromise);
     }
-});
-service.service('reloadRoute', function ($timeout, $window) {
+}]);
+service.service('reloadRoute', ['$timeout', '$window', function ($timeout, $window) {
     let pathReload = null;
     let reloadTimeout = function ($scope) {
         pathReload = $timeout(function () {
@@ -87,13 +87,13 @@ service.service('reloadRoute', function ($timeout, $window) {
     this.cancel = function () {
         $timeout.cancel(pathReload);
     }
-});
-service.service('loginGetaway', function ($location) {
+}]);
+service.service('loginGetaway', ['$location', function ($location) {
     this.goLogin = function () {
         $location.path('/login');
     }
-});
-service.factory('confirmService', function ($modal, $q) {
+}]);
+service.factory('confirmService', ['$modal', '$q', function ($modal, $q) {
     return {
         openConfirmWindow: function ($scope, modalContent) {
             let deferred = $q.defer();
@@ -118,4 +118,4 @@ service.factory('confirmService', function ($modal, $q) {
             return deferred.promise;
         }
     }
-});
+}]);

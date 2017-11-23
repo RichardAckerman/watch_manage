@@ -1,7 +1,7 @@
 'use strict';
 
 let updatePassword = angular.module('watchApp.password', []);
-updatePassword.controller('updPswCtrl', function ($scope, errorMsg, $location, $timeout, password, closeWind, pathLogin) {
+updatePassword.controller('updPswCtrl', ['$scope', 'errorMsg', '$location', '$timeout', 'password', 'closeWind', 'pathLogin', function ($scope, errorMsg, $location, $timeout, password, closeWind, pathLogin) {
     $scope.warnMsg = true;
     $scope.sucMsg = true;
     $scope.errorPassword = errorMsg.password;
@@ -58,5 +58,5 @@ updatePassword.controller('updPswCtrl', function ($scope, errorMsg, $location, $
         closeWind.cancel();
         pathLogin.cancel()
     });
-});
+}]);
 

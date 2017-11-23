@@ -1,9 +1,9 @@
 'use strict';
 
 let api = angular.module('watchApp.api', []);
-const TEST = 'http://192.168.1.254:8080/watch';
+const TEST = 'http://127.0.0.1:8080/watch';
 const PRODUCT = 'https://so360.org/watch';
-const HOST = TEST;
+const HOST = PRODUCT;
 const API_LOGIN = HOST + '/adminSignIn';
 const API_LOGOUT = HOST + '/logOut';
 const API_INDEX_DATA = HOST + '/admin/adminIndexView';
@@ -26,7 +26,7 @@ const API_POSITION_EMAIL = HOST + '/admin/equipInfo/info';
 const API_POSITION_IMEI = HOST + '/admin/equipInfo/imei/';
 const API_POSITION_NAME = HOST + '/admin/equipInfo/name/';
 const API_RESET_PHONE = HOST + '/admin/reset/userPhone/';
-api.config(function ($httpProvider) {
+api.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded';
     $httpProvider.defaults.headers.patch['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -36,8 +36,8 @@ api.config(function ($httpProvider) {
             return $httpProvider.defaults.paramSerializer(data)
         }
     ];
-});
-api.factory('authService', function ($http) {
+}]);
+api.factory('authService', ['$http', function ($http) {
     return {
         signIn: function (params) {
             return $http({
@@ -61,8 +61,8 @@ api.factory('authService', function ($http) {
             })
         }
     };
-});
-api.factory('indexService', function ($http) {
+}]);
+api.factory('indexService', ['$http', function ($http) {
     return {
         indexData: function () {
             return $http({
@@ -71,8 +71,8 @@ api.factory('indexService', function ($http) {
             });
         }
     }
-});
-api.factory('password', function ($http) {
+}]);
+api.factory('password', ['$http', function ($http) {
     return {
         updatePassword: function (params) {
             return $http({
@@ -82,8 +82,8 @@ api.factory('password', function ($http) {
             });
         }
     }
-});
-api.factory('userInfo', function ($http) {
+}]);
+api.factory('userInfo', ['$http', function ($http) {
     return {
         update: function (params) {
             return $http({
@@ -100,8 +100,8 @@ api.factory('userInfo', function ($http) {
             });
         }
     }
-});
-api.factory('library', function ($http) {
+}]);
+api.factory('library', ['$http', function ($http) {
     return {
         queryByImei: function (imei) {
             return $http({
@@ -176,8 +176,8 @@ api.factory('library', function ($http) {
             })
         }
     }
-});
-api.factory('dealer', function ($http) {
+}]);
+api.factory('dealer', ['$http', function ($http) {
     return {
         addCus: function (param) {
             return $http({
@@ -212,8 +212,8 @@ api.factory('dealer', function ($http) {
             });
         },
     }
-});
-api.factory('location', function ($http) {
+}]);
+api.factory('location', ['$http', function ($http) {
     return {
         queryEquipNum: function (id) {
             return $http({
@@ -241,4 +241,4 @@ api.factory('location', function ($http) {
             });
         }
     }
-});
+}]);
