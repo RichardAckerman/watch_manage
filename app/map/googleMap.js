@@ -83,7 +83,7 @@ googleMap.controller("googleMapCtrl", ["$scope", "$filter", "$timeout", "$interv
     $scope.pointCoordinate = {}; //当前选中点坐标
     $scope.mapMakers = [];
     $scope.createMark = function (val) {
-        let src = val.online ? "map/online.png" : "map/offline.png";
+        let src = val.online ? "../assets/images/online.png" : "../assets/images/offline.png";
         if (val.lat === undefined) {
             return;
         }

@@ -28,8 +28,8 @@ customer.directive('contextmenu', ['$filter', function ($filter) {
 }]);
 
 customer.controller('customerCtrl', ['$rootScope', '$scope', 'indexService', 'loginGetaway', 'dealer', 'pathLogin', 'confirmService',
-    'library', 'errorMsg', 'ordinaryMsg', '$window', '$filter', 'closeWind', function ($rootScope, $scope, indexService, loginGetaway, dealer, pathLogin, confirmService,
-                                                                                       library, errorMsg, ordinaryMsg, $window, $filter, closeWind) {
+    'library', 'errorMsg', 'ordinaryMsg', '$window', '$filter', 'closeWind', '$timeout', function ($rootScope, $scope, indexService, loginGetaway, dealer, pathLogin, confirmService,
+                                                                                                   library, errorMsg, ordinaryMsg, $window, $filter, closeWind, $timeout) {
         // 管理显示添加设备功能
         $scope.isAdmin = false;
         // 点击客户加上class
@@ -53,10 +53,6 @@ customer.controller('customerCtrl', ['$rootScope', '$scope', 'indexService', 'lo
             .indexData()
             .success(function (res) {
                 if (res.code === 200) {
-                    if (res.result === null || res.result === undefined) {
-                        loginGetaway.goLogin();
-                        return false;
-                    }
                     let result = res.result;
                     $scope.messageType = ordinaryMsg.customerInfo;
                     $rootScope.userAdmin = result.userInfoDTO;
@@ -83,7 +79,28 @@ customer.controller('customerCtrl', ['$rootScope', '$scope', 'indexService', 'lo
                     $scope.$broadcast("superiorInfo", $scope.userDealer);
                 }
                 if (res.code === 408) {
-                    loginGetaway.goLogin();
+                    $scope.msgModal = errorMsg.serviceException;
+                    angular.element('.bs-example-modal-sm').modal('toggle');
+                    let timer = $timeout(function () {
+                        $timeout.cancel(timer);
+                        angular.element('.bs-example-modal-sm').modal('hide');
+                        let go = $timeout(function () {
+                            $timeout.cancel(go);
+                            loginGetaway.goLogin();
+                        }, 2000);
+                    }, 3000);
+                }
+                if (res.code === 409) {
+                    $scope.msgModal = res.msg === 'Abnormal permissions!' ? errorMsg.abnormalPermissions : errorMsg.serviceException;
+                    angular.element('.bs-example-modal-sm').modal('toggle');
+                    let timer = $timeout(function () {
+                        $timeout.cancel(timer);
+                        angular.element('.bs-example-modal-sm').modal('hide');
+                        let go = $timeout(function () {
+                            $timeout.cancel(go);
+                            loginGetaway.goLogin();
+                        }, 2000);
+                    }, 3000);
                 }
             })
             .error(function () {

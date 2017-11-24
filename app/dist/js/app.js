@@ -5,7 +5,7 @@ var app = angular.module('watchApp', ['ngRoute', 'ngCookies', 'watchApp.editUser
 app.config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     // $locationProvider.html5Mode(true); //消除路由中的#
     $locationProvider.hashPrefix('!');
-    $routeProvider.otherwise({ redirectTo: '/customer' });
+    $routeProvider.otherwise({ redirectTo: '/login' });
 }]);
 app.directive('loading', function () {
     return {

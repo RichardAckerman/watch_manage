@@ -20,21 +20,21 @@
         <div class="col-md-2 customer-list-head">
             <div class="row customer-list-row font-head">
                 <div class="col-md-8 font-head-small">客户列表</div>
-                <div class="col-md-4 add-button"><img src="https://so360.org/static/add.png"
+                <div class="col-md-4 add-button"><img src="dist/images/add.png"
                                                       class="customer-list-image">
                     <a href="javascript:void(0)" ng-click="addCustomer()">新增</a></div>
             </div>
             <div class="customer-right-nav">
                 <div class="customer-right-nav-father" data-toggle="collapse" data-target=".child"
                      ng-click="superiorSelected()">
-                    <img src="https://so360.org/static/customer_group.png" alt="father">
+                    <img src="dist/images/customer_group.png" alt="father">
                     <a href="javascript:void(0);" ng-class="{active : isActive === 1}">
                         {{userAdmin.userName}}({{userEquipNum}})
                     </a>
                 </div>
                 <div class="child" ng-repeat="subordinateDealer in subordinateDealers">
                     <div class="customer-right-nav-child">
-                        <img src="https://so360.org/static/customer_one.png" alt="child">
+                        <img src="dist/images/customer_one.png" alt="child">
                         <a href="javascript:void(0);" ng-click="listActive($index)" data-index="{{$index}}" contextmenu
                            ng-class="{active : dealerActive === $index}">{{subordinateDealer.userName}}
                             ({{subordinateDealer.equipNum}})</a>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-md-1 cus-con-head-right">
                     <div class="cus-con-head-r-edit" data-toggle="modal" data-target="#editUserInfo">
-                        <img src="https://so360.org/static/edit.png" alt="编辑" class="cus-con-head-r-i">
+                        <img src="dist/images/edit.png" alt="编辑" class="cus-con-head-r-i">
                         <span>编辑</span>
                     </div>
                 </div>

@@ -16,6 +16,7 @@ service.value('errorMsg', {
     },
     loginGetaway: '登录过期,请再次登录!',
     serviceException: '服务器异常,请联系管理员!',
+    abnormalPermissions: '权限不符',
     queryEmpty: '未查询到相应数据!',
     email: '邮箱格式错误',
     noChoose: '请先选择',
