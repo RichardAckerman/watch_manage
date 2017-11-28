@@ -39,108 +39,111 @@
       background: url('../images/icon.png') no-repeat -179px -120px;
     }
   }
-  .customer-list-head{
-    padding-right: 0;
-    white-space: nowrap;
-    .float-icon{
-      right: 0;
-      text-align: right;
-    }
-    .panel-group{
-      padding-top: 10px;
-      height: 780px;
-      box-sizing: border-box;
-      overflow-y: scroll;
-      margin: 0;
-      .panel-default{
-        border: none;
-        a{
-          width: 80%;
-          display: inline-block;
-          padding: 5px;
-          border: 1px solid transparent;
-          color: $font_color_gray;
-          &.active{
-            background: $background_list;
-            border-color: $background_head;
-          }
-          &.online{
-            color: $equip_online;
-          }
-        }
-        .panel-heading{
-          background: none;
-          i{
-            padding: 0 24px 0 0;
-            background: url("../images/icon.png") no-repeat;
-            &.icon-close{
-              background: url("../images/icon.png") no-repeat -236px -177px;
-            }
-            &.icon-open{
-              background-position: -175px -177px;
-            }
-          }
+  .customer-list{
+    .customer-list-head{
+      padding-right: 0;
+      white-space: nowrap;
+      height: 100%;
+      .float-icon{
+        right: 0;
+        text-align: right;
+      }
+      .panel-group{
+        padding-top: 10px;
+        //height: 780px;
+        box-sizing: border-box;
+        overflow-y: scroll;
+        margin: 0;
+        .panel-default{
+          border: none;
           a{
-            color: $font_color_deep_black;
+            width: 80%;
+            display: inline-block;
+            padding: 5px;
+            border: 1px solid transparent;
+            color: $font_color_gray;
+            &.active{
+              background: $background_list;
+              border-color: $background_head;
+            }
+            &.online{
+              color: $equip_online;
+            }
+          }
+          .panel-heading{
+            background: none;
+            i{
+              padding: 0 24px 0 0;
+              background: url("../images/icon.png") no-repeat;
+              &.icon-close{
+                background: url("../images/icon.png") no-repeat -236px -177px;
+              }
+              &.icon-open{
+                background-position: -175px -177px;
+              }
+            }
+            a{
+              color: $font_color_deep_black;
+            }
+          }
+          .panel-body{
+            padding: 5px;
+            padding-left: 50px;
+            .equip-list{
+              margin: 0;
+            }
           }
         }
-        .panel-body{
-          padding: 5px;
-          padding-left: 50px;
-          .equip-list{
-            margin: 0;
+      }
+    }
+    .position-map{
+      padding-left: 0;
+      //min-height: 820px;
+      .float-icon{
+        left: 0;
+        text-align: left;
+        z-index: 10;
+        .icon{
+          background-position: -239px -120px;
+        }
+      }
+      .position-map-head{
+        padding: 5px 18px;
+        margin-left: 0;
+        font-size: 17px;
+        background: $font_color_white;
+        .position-map-btn-control{
+          float: right;
+          width: 450px;
+          select{
+            height: 27px;
+            width: 104px;
+          }
+          input[type="checkbox"]{
+            width: 16px;
+            height: 16px;
+            position: relative;
+            top: 2px;
+          }
+          .chk-label{
+            font-weight: normal;
           }
         }
       }
-    }
-  }
-  .position-map{
-    padding-left: 0;
-    min-height: 820px;
-    .float-icon{
-      left: 0;
-      text-align: left;
-      z-index: 10;
-      .icon{
-        background-position: -239px -120px;
-      }
-    }
-    .position-map-head{
-      padding: 5px 18px;
-      margin-left: 0;
-      font-size: 17px;
-      background: $font_color_white;
-      .position-map-btn-control{
-        float: right;
-        width: 450px;
-        select{
-          height: 27px;
-          width: 104px;
-        }
-        input[type="checkbox"]{
-          width: 16px;
-          height: 16px;
-          position: relative;
-          top: 2px;
-        }
-        .chk-label{
-          font-weight: normal;
-        }
-      }
-    }
-    .position-map-body{
-      height: 780px;
-      width: 100%;
-      label{
-        max-width: none;
-      }
-      .position-map-content{
-        height: 100%;
+      .position-map-body{
+        //height: 780px;
         width: 100%;
-        position: relative;
-        .map-style{
-          height: 800px;
-          width: 800px;
+        label{
+          max-width: none;
+        }
+        .position-map-content{
+          height: 100%;
+          width: 100%;
+          position: relative;
+          .map-style{
+            height: 800px;
+            width: 800px;
+          }
         }
       }
     }

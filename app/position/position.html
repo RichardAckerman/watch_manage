@@ -24,7 +24,7 @@
             <div class="row customer-list-row font-head">
                 <div class="col-md-8 font-head-small" ng-click="showPosition()">设备列表</div>
             </div>
-            <div class="panel-group" role="tablist" aria-multiselectable="true">
+            <div class="panel-group" id="listContainer" role="tablist" aria-multiselectable="true">
                 <div class="panel panel-default" ng-repeat="info in dealerInfo">
                     <div class="panel-heading" role="tab">
                         <h4 class="panel-title">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            <div class="position-map-body">
+            <div class="position-map-body" id="mapContainer">
                 <div id="baiduContainer" style="height: 100%" ng-controller="baiduMapCtrl"
                      ng-if="mapChoose == 'baidu'"></div>
                 <div id="googleContainer" style="height: 100%" ng-controller="googleMapCtrl"

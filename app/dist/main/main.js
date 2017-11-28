@@ -143,18 +143,6 @@ addEquip.controller('addEquipCtrl', ["$scope", "$rootScope", "library", "closeWi
 }]);
 'use strict';
 
-var confirm = angular.module('watchApp.confirm', ['ui.bootstrap']);
-confirm.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'data', function ($scope, $modalInstance, data) {
-    $scope.modalContent = data.modalContent;
-    $scope.ok = function () {
-        $modalInstance.close();
-    };
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-}]);
-'use strict';
-
 var api = angular.module('watchApp.api', []);
 var TEST = 'http://127.0.0.1:8080/watch';
 var PRODUCT = 'https://so360.org/watch';
@@ -514,6 +502,18 @@ service.factory('confirmService', ['$modal', '$q', function ($modal, $q) {
             }, function () {});
             return deferred.promise;
         }
+    };
+}]);
+'use strict';
+
+var confirm = angular.module('watchApp.confirm', ['ui.bootstrap']);
+confirm.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'data', function ($scope, $modalInstance, data) {
+    $scope.modalContent = data.modalContent;
+    $scope.ok = function () {
+        $modalInstance.close();
+    };
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
     };
 }]);
 'use strict';
@@ -2649,6 +2649,10 @@ position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "lo
     $scope.loading = true;
     $rootScope.userAdmin = null;
     $scope.dealerInfo = null;
+    var listBox = angular.element('#listContainer');
+    var mapBox = angular.element('#mapContainer');
+    listBox.height(document.documentElement.clientHeight - 170);
+    mapBox.height(document.documentElement.clientHeight - 170);
     $scope.getEquipInfo = function () {
         indexService.indexData().success(function (data) {
             if (data.code === 200) {
@@ -2955,26 +2959,6 @@ rightMenu.controller('rightMenuCtrl', ['$scope', 'dealer', 'pathLogin', 'errorMs
 }]);
 "use strict";
 
-var searchCustomers = angular.module('watchApp.searchCustomers', []);
-searchCustomers.controller('searchCustomersCtrl', ["$scope", "$timeout", "$location", function ($scope, $timeout, $location) {
-    $scope.$on('myCustomerInfo', function (event, data) {
-        $scope.cusInfo = data;
-    });
-    $scope.showCustomer = function () {
-        angular.element('#searchCustomers').modal('hide');
-        angular.element('#showCustomer').modal('toggle');
-        $scope.$emit('showCusInfo', $scope.cusInfo);
-    };
-    $scope.showPosition = function () {
-        angular.element('#searchCustomers').modal('hide');
-        var timer = $timeout(function () {
-            $location.path('/position/' + $scope.cusInfo.email);
-            $timeout.cancel(timer);
-        }, 500);
-    };
-}]);
-"use strict";
-
 var searchEquips = angular.module('watchApp.searchEquips', []);
 searchEquips.controller('searchEquipsCtrl', ["$scope", "library", "closeWind", "pathLogin", "ordinaryMsg", "errorMsg", "loginGetaway", "dealer", "$location", "$timeout", function ($scope, library, closeWind, pathLogin, ordinaryMsg, errorMsg, loginGetaway, dealer, $location, $timeout) {
     $scope.warnMsg = true;
@@ -3052,6 +3036,26 @@ searchEquips.controller('searchEquipsCtrl', ["$scope", "library", "closeWind", "
         angular.element('#searchEquips').modal('hide');
         var timer = $timeout(function () {
             $location.path('/position/' + $scope.customer.email);
+            $timeout.cancel(timer);
+        }, 500);
+    };
+}]);
+"use strict";
+
+var searchCustomers = angular.module('watchApp.searchCustomers', []);
+searchCustomers.controller('searchCustomersCtrl', ["$scope", "$timeout", "$location", function ($scope, $timeout, $location) {
+    $scope.$on('myCustomerInfo', function (event, data) {
+        $scope.cusInfo = data;
+    });
+    $scope.showCustomer = function () {
+        angular.element('#searchCustomers').modal('hide');
+        angular.element('#showCustomer').modal('toggle');
+        $scope.$emit('showCusInfo', $scope.cusInfo);
+    };
+    $scope.showPosition = function () {
+        angular.element('#searchCustomers').modal('hide');
+        var timer = $timeout(function () {
+            $location.path('/position/' + $scope.cusInfo.email);
             $timeout.cancel(timer);
         }, 500);
     };

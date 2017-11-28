@@ -26,6 +26,7 @@
     background-color: $background_breadcrumb;
     padding-top: 7px;
     text-align: right;
+    white-space: nowrap;
     .customer-button-style {
       margin: -6px 0px 0px 8px;
       width: 50px;
@@ -42,6 +43,7 @@
     margin-left: 0;
     .customer-right-nav {
       margin: 20px 28px 0;
+      white-space: nowrap;
       .customer-right-nav-father {
         margin-bottom: 10px;
         a {
@@ -57,7 +59,7 @@
       }
       .customer-right-nav-child {
         margin-bottom: 9px;
-        margin-left: 47px;
+        margin-left: 18px;
         img {
           margin-right: 13px;
         }
@@ -74,7 +76,6 @@
       }
     }
     .customer-list-head {
-      min-height: 820px;
       background-color: $font_color_white;
       .customer-list-row {
         height: 40px;
@@ -110,9 +111,11 @@
           border: 1px solid $background_gray_fill;
           border-right-width: 0;
           border-left-width: 0;
+          padding-right: 0;
           .cus-con-head-r-list {
             margin-top: 14px;
             margin-left: 50px;
+            white-space: nowrap;
             .cus-con-head-r-span {
               width: 180px;
             }
@@ -120,6 +123,7 @@
           .cus-con-head-r-edit {
             margin-top: 29px;
             cursor: pointer;
+            white-space: nowrap;
             a {
               text-decoration: none
             }

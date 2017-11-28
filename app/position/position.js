@@ -22,6 +22,10 @@ position.controller('positionCtrl', ["$rootScope", "$scope", "indexService", "lo
         $scope.loading = true;
         $rootScope.userAdmin = null;
         $scope.dealerInfo = null;
+        let listBox = angular.element('#listContainer');
+        let mapBox = angular.element('#mapContainer');
+        listBox.height(document.documentElement.clientHeight - 170);
+        mapBox.height(document.documentElement.clientHeight - 170);
         $scope.getEquipInfo = function () {
             indexService
                 .indexData()
